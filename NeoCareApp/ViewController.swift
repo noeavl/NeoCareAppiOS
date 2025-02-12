@@ -9,11 +9,12 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var txfEmail: UITextField!
+    @IBOutlet weak var txfPassword: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        txfEmail.layer.cornerRadius = 20
     }
-
 
 }
 
