@@ -8,6 +8,7 @@
 import UIKit
 
 class RoomDetailViewController: UIViewController {
+    var room: RoomsViewController.Room?
 
     @IBOutlet weak var viewIconIncubator2: UIView!
     @IBOutlet weak var viewIconIncubator: UIView!
