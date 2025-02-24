@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Z1x-tb-rgj">
+
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sqZ-Eb-4pZ">
+
     <device id="retina6_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
@@ -1574,18 +1576,20 @@
                                 <rect key="frame" x="20" y="140" width="400" height="762"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BabyCell" rowHeight="158" id="Pvb-Xa-lky" customClass="BabyTableViewCell" customModule="NeoCareApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="400" height="158"/>
+
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BabyCell" rowHeight="136" id="Pvb-Xa-lky" customClass="RoomsTableViewCell" customModule="NeoCareApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="400" height="136"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pvb-Xa-lky" id="154-Ka-iyS">
-                                            <rect key="frame" x="0.0" y="0.0" width="400" height="158"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="136"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCk-NY-rgL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="148"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="126"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0p1-R7-tbS">
-                                                            <rect key="frame" x="10" y="10" width="380" height="128"/>
+                                                            <rect key="frame" x="10" y="10" width="380" height="106"/>
+
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baby.png" translatesAutoresizingMaskIntoConstraints="NO" id="lLG-m3-n7A">
                                                                     <rect key="frame" x="10" y="10" width="20" height="20"/>
@@ -1609,23 +1613,29 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manuel Medrano Castro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4St-0Q-N5P">
-                                                                    <rect key="frame" x="40" y="9.9999999999999982" width="330" height="20.333333333333329"/>
+
+                                                                    <rect key="frame" x="40" y="10" width="330" height="21"/>
+
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <size key="shadowOffset" width="0.0" height="1"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incubator 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrF-Xe-NJQ">
-                                                                    <rect key="frame" x="40" y="98" width="330" height="21"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                    <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <size key="shadowOffset" width="0.0" height="1"/>
-                                                                </label>
+
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17/01/25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZx-ei-Ugg">
-                                                                    <rect key="frame" x="40" y="54.000000000000007" width="330" height="20.333333333333336"/>
+                                                                    <rect key="frame" x="40" y="41" width="330" height="21"/>
+
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <size key="shadowOffset" width="0.0" height="1"/>
+                                                                </label>
+
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incubator 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrF-Xe-NJQ">
+                                                                    <rect key="frame" x="40" y="74" width="330" height="21"/>
+
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -1796,6 +1806,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZS-bI-G8q" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-777" y="2202"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Vqg-Wn-krT">
+            <objects>
+                <viewController id="ELj-Nq-kaG" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KXj-QG-VKl">
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incubadoras" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DS0-01-K2T">
+                                <rect key="frame" x="92" y="72" width="328" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="DS0-01-K2T" secondAttribute="height" multiplier="29:6" id="ps5-yg-iEQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="39"/>
+                                <color key="textColor" name="ciruela"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vJo-Ru-gYc">
+                                <rect key="frame" x="20" y="72" width="72" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="vJo-Ru-gYc" secondAttribute="height" multiplier="17:16" id="9nB-un-AEH"/>
+                                </constraints>
+                                <color key="tintColor" name="ciruela"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.left.fill" catalog="system"/>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wqU-pi-uMh">
+                                <rect key="frame" x="44" y="160" width="352" height="164"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kTD-jB-ag7">
+                                        <rect key="frame" x="10" y="10" width="332" height="144"/>
+                                        <color key="backgroundColor" name="orquidea"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" name="lavanda"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="kTD-jB-ag7" secondAttribute="trailing" constant="10" id="DLa-y5-ObS"/>
+                                    <constraint firstItem="kTD-jB-ag7" firstAttribute="leading" secondItem="wqU-pi-uMh" secondAttribute="leading" constant="10" id="NZI-Pv-Qkl"/>
+                                    <constraint firstAttribute="width" secondItem="wqU-pi-uMh" secondAttribute="height" multiplier="15:7" id="Rxd-gX-0ek"/>
+                                    <constraint firstItem="kTD-jB-ag7" firstAttribute="top" secondItem="wqU-pi-uMh" secondAttribute="top" constant="10" id="WKC-Z5-4d1"/>
+                                    <constraint firstAttribute="bottom" secondItem="kTD-jB-ag7" secondAttribute="bottom" constant="10" id="xjo-X0-Hi6"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="g6h-eN-58U"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="wqU-pi-uMh" firstAttribute="centerX" secondItem="KXj-QG-VKl" secondAttribute="centerX" id="Jld-64-m0W"/>
+                            <constraint firstItem="wqU-pi-uMh" firstAttribute="top" secondItem="DS0-01-K2T" secondAttribute="bottom" constant="20" id="Jzc-Y3-kpT"/>
+                            <constraint firstItem="g6h-eN-58U" firstAttribute="trailing" secondItem="DS0-01-K2T" secondAttribute="trailing" constant="20" id="O7k-zw-sMG"/>
+                            <constraint firstItem="DS0-01-K2T" firstAttribute="top" secondItem="g6h-eN-58U" secondAttribute="top" constant="10" id="YJx-lt-fUR"/>
+                            <constraint firstItem="DS0-01-K2T" firstAttribute="leading" secondItem="vJo-Ru-gYc" secondAttribute="trailing" id="c9I-jv-yMh"/>
+                            <constraint firstItem="wqU-pi-uMh" firstAttribute="width" secondItem="KXj-QG-VKl" secondAttribute="width" multiplier="0.8" id="p3h-Rh-HN5"/>
+                            <constraint firstItem="DS0-01-K2T" firstAttribute="bottom" secondItem="vJo-Ru-gYc" secondAttribute="bottom" id="pBu-fD-Vqp"/>
+                            <constraint firstItem="vJo-Ru-gYc" firstAttribute="leading" secondItem="g6h-eN-58U" secondAttribute="leading" constant="20" id="ujY-0Y-CmT"/>
+                            <constraint firstItem="DS0-01-K2T" firstAttribute="top" secondItem="vJo-Ru-gYc" secondAttribute="top" id="vHJ-YK-c7v"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f8j-4Q-AX6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-776" y="2930"/>
         </scene>
         <!--Add Incubator View Controller-->
         <scene sceneID="VKr-jq-Mb0">
@@ -2707,6 +2780,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="LOGOBLANCO.png" width="1241" height="996"/>
+        <image name="arrowshape.left.fill" catalog="system" width="128" height="104"/>
         <image name="baby-icon.png" width="470" height="512"/>
         <image name="baby.png" width="32" height="32"/>
         <image name="cake-icon.png" width="512" height="512"/>
@@ -2731,6 +2805,9 @@
         </namedColor>
         <namedColor name="ciruela">
             <color red="0.18000000715255737" green="0.027000000700354576" blue="0.24699999392032623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="lavanda">
+            <color red="0.92199999094009399" green="0.82700002193450928" blue="0.97299998998641968" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orquidea">
             <color red="0.67799997329711914" green="0.28600001335144043" blue="0.88200002908706665" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
