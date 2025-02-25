@@ -27,6 +27,12 @@ class ChecksViewController: UIViewController, UITableViewDataSource {
     var checks: [Check] = [
         Check(id: 1, title: "Nacio el bebe", nurse: "Juanita Lopez Perez", baby: "Miguel Pedro Lopez Perez", date: Date()), Check(id: 1, title: "Nacio el bebe", nurse: "Juanita Lopez Perez", baby: "Miguel Pedro Lopez Perez", date: Date()),
         Check(id: 1, title: "Nacio el bebe", nurse: "Juanita Lopez Perez", baby: "Miguel Pedro Lopez Perez", date: Date()),
+        Check(id: 1, title: "Nacio el bebe", nurse: "Juanita Lopez Perez", baby: "Miguel Pedro Lopez Perez", date: Date()),
+        Check(id: 1, title: "Nacio el bebe", nurse: "Juanita Lopez Perez", baby: "Miguel Pedro Lopez Perez", date: Date()), Check(id: 1, title: "Nacio el bebe", nurse: "Juanita Lopez Perez", baby: "Miguel Pedro Lopez Perez", date: Date()),
+        Check(id: 1, title: "Nacio el bebe", nurse: "Juanita Lopez Perez", baby: "Miguel Pedro Lopez Perez", date: Date()),
+        Check(id: 1, title: "Nacio el bebe", nurse: "Juanita Lopez Perez", baby: "Miguel Pedro Lopez Perez", date: Date()),
+        Check(id: 1, title: "Nacio el bebe", nurse: "Juanita Lopez Perez", baby: "Miguel Pedro Lopez Perez", date: Date()), Check(id: 1, title: "Nacio el bebe", nurse: "Juanita Lopez Perez", baby: "Miguel Pedro Lopez Perez", date: Date()),
+        Check(id: 1, title: "Nacio el bebe", nurse: "Juanita Lopez Perez", baby: "Miguel Pedro Lopez Perez", date: Date()),
         Check(id: 1, title: "Nacio el bebe", nurse: "Juanita Lopez Perez", baby: "Miguel Pedro Lopez Perez", date: Date())
     ]
     override func viewDidLoad() {
