@@ -16,6 +16,9 @@ class AddFamiliarViewController: UIViewController {
     }
     
 
+    @IBAction func Regresar() {
+        dismiss(animated: true)
+    }
     /*
     // MARK: - Navigation
 

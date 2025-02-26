@@ -9,6 +9,7 @@ import UIKit
 
 class CreateBabyViewController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -16,6 +17,9 @@ class CreateBabyViewController: UIViewController {
     }
     
 
+    @IBAction func Regresar() {
+        dismiss(animated: true)
+    }
     /*
     // MARK: - Navigation
 
