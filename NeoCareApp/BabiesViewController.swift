@@ -8,6 +8,9 @@
 import UIKit
 
 class BabiesViewController: UIViewController, UITableViewDataSource {
+    
+    @IBOutlet weak var viewAdd: UIView!
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return babies.count
     }
@@ -43,6 +46,7 @@ class BabiesViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewBabies.dataSource = self
+        viewAdd.roundCorners([.allCorners], 40.0)
         
     }
     
