@@ -9,21 +9,36 @@ import UIKit
 
 class IncubatorDetailViewController: UIViewController {
 
+    @IBOutlet weak var backgroundBabyView: UIView!
+    @IBOutlet weak var iconBabyView: UIView!
+    @IBOutlet weak var labelbabyeView: UIView!
+    
+    @IBOutlet weak var backgroundNurseView: UIView!
+    @IBOutlet weak var iconNurseView: UIView!
+    @IBOutlet weak var labelNurseView: UIView!
+
+    @IBOutlet weak var dataButtonView: UIView!
+    @IBOutlet weak var incubatorButtonView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        backgroundBabyView.layer.cornerRadius = 30.0
+        iconBabyView.layer.cornerRadius = 30.0
+        labelbabyeView.layer.cornerRadius = 20.0
+        
+        backgroundNurseView.layer.cornerRadius = 30.0
+        iconNurseView.layer.cornerRadius = 30.0
+        labelNurseView.layer.cornerRadius = 20.0
     }
-    */
-
+    
+    @IBAction func backButton() {
+        dismiss(animated: true)
+    }
 }
