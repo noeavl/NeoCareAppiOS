@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Cerrar el teclado cuando toca la vista de la pantalla.
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
@@ -49,16 +50,13 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func login() {
-        // Cierra el teclado
         view.endEditing(true)
         
-        // Validaciones para los campos
-        guard let email = txfEmail.text?.trimmingCharacters(in: .whitespaces),
-              let password = txfPassword.text?.trimmingCharacters(in: .whitespaces),
-              !email.isEmpty, !password.isEmpty else {
-            showError(message: "Por favor completa todos los campos")
-            return
-        }
+        guard let email = txfEmail.text?.trimmingCharacters(in: .whitespaces),let password = txfPassword.text?.trimmingCharacters(in: .whitespaces),
+                  !email.isEmpty, !password.isEmpty else {
+                showError(message: "Please enter both email and password")
+                return
+            }
         
         showLoadingIndicator()
         
@@ -70,12 +68,12 @@ class LoginViewController: UIViewController {
                 self?.hideLoadingIndicator()
             
                 if let error = error {
-                    self?.showError(message: "Error de red: \(error.localizedDescription)")
+                    self?.showError(message: "Network Error: \(error.localizedDescription)")
                     return
                 }
                 
                 guard let httpResponse = response as? HTTPURLResponse else {
-                    self?.showError(message: "Respuesta inválida")
+                    self?.showError(message: "Invalid Response.")
                     return
                 }
                 
@@ -84,22 +82,22 @@ class LoginViewController: UIViewController {
                     case 200...299:
                         self?.handleSuccessResponse(data: data)
                     case 401:
-                        self?.showError(message: "Credenciales incorrectas")
+                        self?.showError(message: "Invalid Credentials.")
                     case 422:
                         if let data = data {
                                 self?.handleValidationErrors(data: data)
                             } else {
-                                self?.showError(message: "Errores de validación, revise el formulario.")
+                                self?.showError(message: "Validation errors, please review the form.")
                             }
                     default:
-                        self?.showError(message: "Error desconocido")
+                        self?.showError(message: "Unknown Error.")
                     }
                 }
             }.resume()
             
         } catch {
             hideLoadingIndicator()
-            showError(message: "Error creando la solicitud")
+            showError(message: "Error creating the request.")
         }
     }
     
@@ -126,10 +124,11 @@ class LoginViewController: UIViewController {
             }
             
         } catch {
-            showError(message: "Errores de validación, revise el formulario.")
+            showError(message: "Validation errors, please review the form.")
         }
     }
     
+    // Función para crear la estructura de la solicitud.
     private func createURLRequest(for loginRequest: LoginRequest) throws -> URLRequest {
         guard let url = URL(string: loginEndpoint) else {
             throw NetworkError.invalidURL
@@ -144,7 +143,7 @@ class LoginViewController: UIViewController {
     }
     private func handleSuccessResponse(data: Data?) {
         guard let data = data else {
-            showError(message: "Datos de respuesta vacíos")
+            showError(message: "Empty Response data.")
             return
         }
         
@@ -153,7 +152,7 @@ class LoginViewController: UIViewController {
             AuthManager.shared.saveToken(loginResponse.token)
             self.navigateToHomeScreen()
         } catch {
-            showError(message: "Error procesando la respuesta")
+            showError(message: "Error processing the response.")
         }
     }
     
@@ -232,7 +231,7 @@ class LoginViewController: UIViewController {
         lblPasswordError.isHidden = true
     }
 
-    
+    // Funcion para mostrar una animacion de carga en el boton.
     private func showLoadingIndicator() {
         btnLogin.configuration?.showsActivityIndicator = true
         btnLogin.isEnabled = false
