@@ -16,7 +16,10 @@ class ProfileViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func regresar() {
+        dismiss(animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -26,5 +29,27 @@ class ProfileViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    @IBAction func logout() {
+        
+        let alert = UIAlertController(
+                title: "Log Out",
+                message: "Are you sure you want to log out of your account?",
+                preferredStyle: .alert
+            )
+            
+            // Acción para confirmar el logout
+            let confirmAction = UIAlertAction(title: "Log Out", style: .destructive) { _ in
+                AuthManager.shared.logout()
+                self.performSegue(withIdentifier: "sgProfileLogin", sender: nil)
+            }
+            
+            // Acción para cancelar
+            let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel)
+            
+            alert.addAction(confirmAction)
+            alert.addAction(cancelAction)
+            
+            present(alert, animated: true, completion: nil)
+    }
+    
 }
