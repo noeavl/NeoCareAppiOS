@@ -2982,10 +2982,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="99.333333333333329" height="47.333333333333336"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="temperature.png" translatesAutoresizingMaskIntoConstraints="NO" id="WW9-oo-REv">
-                                                        <rect key="frame" x="18.666666666666664" y="10" width="29.666666666666664" height="30"/>
+                                                        <rect key="frame" x="18.666666666666664" y="9.9999999999999982" width="29.666666666666664" height="27.333333333333329"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6OºC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqh-Eq-cxm">
-                                                        <rect key="frame" x="48.333333333333343" y="10" width="52.666666666666657" height="30"/>
+                                                        <rect key="frame" x="48.333333333333343" y="9.9999999999999982" width="52.666666666666657" height="27.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -3164,10 +3164,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="99.333333333333329" height="47.333333333333336"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sound.png" translatesAutoresizingMaskIntoConstraints="NO" id="wXf-Zt-EnI">
-                                                        <rect key="frame" x="30.333333333333329" y="10" width="30" height="24"/>
+                                                        <rect key="frame" x="30.333333333333329" y="9.9999999999999982" width="30" height="27.333333333333329"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="55%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4JP-hE-cpH">
-                                                        <rect key="frame" x="60.333333333333336" y="10" width="28.666666666666664" height="24"/>
+                                                        <rect key="frame" x="60.333333333333336" y="9.9999999999999982" width="28.666666666666664" height="27.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -3254,10 +3254,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="99.333333333333329" height="47.333333333333336"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movement.png" translatesAutoresizingMaskIntoConstraints="NO" id="avK-Rw-okJ">
-                                                        <rect key="frame" x="21.333333333333339" y="10" width="39.666666666666657" height="20"/>
+                                                        <rect key="frame" x="21.333333333333339" y="9.9999999999999982" width="39.666666666666657" height="27.333333333333329"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPd-Dh-azo">
-                                                        <rect key="frame" x="61.000000000000028" y="10" width="27" height="20"/>
+                                                        <rect key="frame" x="61.000000000000028" y="9.9999999999999982" width="27" height="27.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -3344,10 +3344,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="99.333333333333329" height="47.333333333333336"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="light.png" translatesAutoresizingMaskIntoConstraints="NO" id="4xj-Lt-awQ">
-                                                        <rect key="frame" x="18.666666666666664" y="10" width="29.666666666666664" height="32"/>
+                                                        <rect key="frame" x="18.666666666666664" y="9.9999999999999982" width="29.666666666666664" height="27.333333333333329"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="55%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aF-hz-gmM">
-                                                        <rect key="frame" x="48.333333333333343" y="10" width="52.666666666666657" height="32"/>
+                                                        <rect key="frame" x="48.333333333333343" y="9.9999999999999982" width="52.666666666666657" height="27.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -3436,10 +3436,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="99.333333333333329" height="47.333333333333336"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vibration.png" translatesAutoresizingMaskIntoConstraints="NO" id="uQ2-ge-4nc">
-                                                        <rect key="frame" x="21.333333333333339" y="10" width="39.666666666666657" height="20"/>
+                                                        <rect key="frame" x="21.333333333333339" y="9.9999999999999982" width="39.666666666666657" height="27.333333333333329"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMB-sa-2ZB">
-                                                        <rect key="frame" x="61.000000000000028" y="10" width="27" height="20"/>
+                                                        <rect key="frame" x="61.000000000000028" y="9.9999999999999982" width="27" height="27.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var lblHospitalError: UILabel!
     @IBOutlet weak var lblPasswordConfirmationError: UILabel!
@@ -27,7 +27,10 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var txfFirstsurname: UITextField!
     @IBOutlet weak var txfName: UITextField!
     
-   
+    var hospitals: [String] = []
+    var selectedHospital: String? = nil
+    var hospitalPlaceholder = "Select a Hospital"
+    
     var hasStartedTypingName = false
     var hasStartedTypingFirstSurname = false
     var hasStartedTypingSecondSurname = false
@@ -38,6 +41,9 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        pkvHospital.delegate = self
+        pkvHospital.dataSource = self
         
         //Configuraciones iniciales
         btnRegister.isEnabled = false
@@ -184,6 +190,7 @@ class RegisterViewController: UIViewController {
         var emailIsValid = false
         var passwordIsValid = false
         var passwordConfirmIsValid = false
+        var hospitalIsValid = false
       
         
         if hasStartedTypingName {
@@ -274,7 +281,16 @@ class RegisterViewController: UIViewController {
             }
         }
         
-        btnRegister.isEnabled = nameIsValid && firstSurnameIsValid && secondSurnameIsValid && usernameIsValid && emailIsValid && passwordIsValid && passwordConfirmIsValid
+        if selectedHospital != nil {
+            lblHospitalError.isHidden = true
+            hospitalIsValid = true
+        } else {
+            lblHospitalError.text = "Please select a hospital"
+            lblHospitalError.isHidden = false
+            hospitalIsValid = false
+        }
+                
+        btnRegister.isEnabled = nameIsValid && firstSurnameIsValid && secondSurnameIsValid && usernameIsValid && emailIsValid && passwordIsValid && passwordConfirmIsValid && hospitalIsValid
     }
     
     func isValidEmail(_ email: String) -> Bool {
@@ -282,6 +298,51 @@ class RegisterViewController: UIViewController {
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailPredicate.evaluate(with: email)
     }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return hospitals.isEmpty ? 1 : hospitals.count + 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if hospitals.isEmpty{
+            return "Loading Hospitals..."
+        }
+        return row == 0 ? hospitalPlaceholder : hospitals[row - 1]
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if row == 0 {
+                // No hacer nada si selecciona el placeholder
+                selectedHospital = nil
+            } else {
+                selectedHospital = hospitals[row - 1] // Ajustar índice
+            }
+            textFieldDidChange()
+    }
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let label = (view as? UILabel) ?? UILabel()
+            
+        if hospitals.isEmpty {
+            label.text = "Loading hospitals..."
+            label.textColor = .gray
+        } else {
+            if row == 0 {
+                label.text = hospitalPlaceholder
+                label.textColor = .lightGray
+            } else {
+                label.text = hospitals[row - 1]
+                label.textColor = .black
+            }
+        }
+        
+        label.textAlignment = .center
+        return label
+    }
+    
 }
 
 struct RegisterRequest: Encodable {
