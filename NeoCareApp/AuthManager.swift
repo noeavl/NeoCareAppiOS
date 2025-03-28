@@ -26,9 +26,14 @@ class AuthManager: NSObject {
     // MARK: - Propiedades
     // Almacenamiento seguro del token usando Keychain
     private let keychainService = "com.NeoCareApp.authToken"
+    private let userDefaults = UserDefaults.standard
+    private let hospitalIdKey = "hospitalId"
+    private let roleKey = "userRole"
     
     // Token en memoria para acceso rápido
     private var currentToken: String?
+    private var hospitalId: Int?
+    private var userRole: String?
     
     // MARK: - Gestión del Token
     /// Guarda el token en Keychain y memoria
@@ -131,10 +136,38 @@ class AuthManager: NSObject {
     func logout() {
         // 1. Eliminar token
         deleteToken()
+        userDefaults.removeObject(forKey: roleKey)
+        userDefaults.removeObject(forKey: hospitalIdKey)
+        userRole = nil
+        hospitalId = nil
         
         // 2. Notificar al sistema
         NotificationCenter.default.post(name: .didLogout, object: nil)
        
+    }
+    
+    func saveAuthData(token: String, role:String, hospitalId: Int){
+        saveToken(token)
+        saveRole(role)
+        saveHospitalId(hospitalId)
+    }
+    func saveRole(_ role:String){
+        userRole = role
+        userDefaults.set(role, forKey: "role")  
+    }
+    func saveHospitalId(_ id:Int){
+        hospitalId = id
+        userDefaults.set(id, forKey: hospitalIdKey)
+    }
+    func loadAuthData(){
+        userRole = userDefaults.string(forKey: roleKey)
+        hospitalId = userDefaults.integer(forKey: hospitalIdKey)
+    }
+    func getRole() -> String?{
+        return userRole
+    }
+    func getHospitalId() -> Int?{
+        return hospitalId
     }
 }
 

@@ -151,7 +151,11 @@ class LoginViewController: UIViewController {
         
         do {
             let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
-            AuthManager.shared.saveToken(loginResponse.token ?? "")
+            AuthManager.shared.saveAuthData(
+                token: loginResponse.token ?? "",
+                role: loginResponse.role ?? "",
+                hospitalId: loginResponse.hospital_id ?? 1
+            )
             self.navigateToHomeScreen()
         } catch {
             showError(message: "Error processing the response.")
@@ -287,6 +291,8 @@ struct LoginRequest: Encodable {
 struct LoginResponse: Decodable {
     let message: String
     let token: String?
+    let role: String?
+    let hospital_id: Int?
 }
 
 enum NetworkError: Error {

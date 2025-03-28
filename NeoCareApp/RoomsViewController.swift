@@ -11,24 +11,14 @@ class RoomsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     
     @IBOutlet weak var tableViewRooms: UITableView!
+    let roomsEndPoint = ""
     
     struct Room{
         let number: Int
         let name: String
     }
     
-    var rooms: [Room] = [
-        Room(number: 1, name: "Bebes Prematuros"),
-        Room(number: 2, name: "Bebes Negros"),
-        Room(number: 2, name: "Bebes Negros")
-        ,
-        Room(number: 2, name: "Bebes Negros")
-        ,
-        Room(number: 2, name: "Bebes Negros")
-        ,
-        Room(number: 2, name: "Bebes Negros")
-
-    ]
+    var rooms: [Room] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewRooms.dataSource = self
