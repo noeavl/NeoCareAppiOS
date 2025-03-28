@@ -20,6 +20,7 @@ class AuthManager: NSObject {
     // Inicializador privado para prevenir múltiples instancias
     private override init() {
         super.init()
+        loadAuthData()
         print("AuthManager inicializado")
     }
     
@@ -153,7 +154,7 @@ class AuthManager: NSObject {
     }
     func saveRole(_ role:String){
         userRole = role
-        userDefaults.set(role, forKey: "role")  
+        userDefaults.set(role, forKey: roleKey)
     }
     func saveHospitalId(_ id:Int){
         hospitalId = id

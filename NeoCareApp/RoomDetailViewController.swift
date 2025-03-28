@@ -8,7 +8,7 @@
 import UIKit
 
 class RoomDetailViewController: UIViewController {
-    var room: RoomsViewController.Room?
+    //var room: RoomsViewController.Room?
 
     @IBOutlet weak var viewIconIncubator2: UIView!
     @IBOutlet weak var viewIconIncubator: UIView!
@@ -34,7 +34,10 @@ class RoomDetailViewController: UIViewController {
         viewIconIncubator2.roundCorners([.topLeft,.topRight], 20)
     }
     
-
+    @IBAction func regresar() {
+        dismiss(animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 

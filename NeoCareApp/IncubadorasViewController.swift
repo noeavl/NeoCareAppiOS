@@ -37,8 +37,8 @@ class IncubadorasViewController: UIViewController, UITableViewDataSource, UITabl
         let cell  = incubatorTbv.dequeueReusableCell(withIdentifier: "IncubatorCell", for:indexPath)as! IncubatorsTableTableViewCell
         
         let incubator = incubators[indexPath.row]
-        cell.babyNameLbl.text = incubator.babyName
-        cell.nurseNameLbl!.text = incubator.nurseName
+        //cell.babyNameLbl.text = incubator.babyName
+        //cell.nurseNameLbl!.text = incubator.nurseName
         
         return cell
     }

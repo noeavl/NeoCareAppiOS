@@ -154,7 +154,7 @@ class LoginViewController: UIViewController {
             AuthManager.shared.saveAuthData(
                 token: loginResponse.token ?? "",
                 role: loginResponse.role ?? "",
-                hospitalId: loginResponse.hospital_id ?? 1
+                hospitalId: loginResponse.hospital_id ?? -1
             )
             self.navigateToHomeScreen()
         } catch {
@@ -299,4 +299,5 @@ enum NetworkError: Error {
     case invalidURL
     case encodingError
     case decodingError
+    case invalidParameters
 }
