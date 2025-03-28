@@ -73,8 +73,6 @@ class RoomsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         let urlString = roomsEndPoint + "?hospital_id=\(String(hospitalId))"
         
-        print(urlString)
-        
         guard let url = URL(string: urlString ) else {
             throw NetworkError.invalidURL
         }
