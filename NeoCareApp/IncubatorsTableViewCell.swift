@@ -5,20 +5,19 @@
 //  Created by Noe  on 28/03/25.
 //
 
-import UIKit
+import UIKit 
 
 class IncubatorsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var incubatorView: UIView!
-    
+    @IBOutlet weak var superViewIncubator: UIView!
     @IBOutlet weak var babyNameView: UIView!
     @IBOutlet weak var nurseNameView: UIView!
     @IBOutlet weak var statusView: UIView!
-    @IBOutlet weak var buttonView: UIView!
     @IBOutlet weak var babyNameLbl: UILabel!
     @IBOutlet weak var nurseNameLbl: UILabel!
-    @IBOutlet weak var contentIncubator: UIView!
-    @IBOutlet weak var viewButton: UIView!
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

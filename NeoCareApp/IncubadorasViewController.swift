@@ -34,12 +34,15 @@ class IncubadorasViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell  = incubatorTbv.dequeueReusableCell(withIdentifier: "IncubatorCell", for:indexPath)as! IncubatorsTableTableViewCell
+        let cell  = incubatorTbv.dequeueReusableCell(withIdentifier: "IncubatorCell", for:indexPath) as! IncubatorsTableViewCell
         
         let incubator = incubators[indexPath.row]
         //cell.babyNameLbl.text = incubator.babyName
         //cell.nurseNameLbl!.text = incubator.nurseName
         
         return cell
+    }
+    @IBAction func regresar() {
+        dismiss(animated: true)
     }
 }

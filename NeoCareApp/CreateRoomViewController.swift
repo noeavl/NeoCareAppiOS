@@ -31,4 +31,7 @@ class CreateRoomViewController: UIViewController {
     }
     */
 
+    @IBAction func regresar() {
+        dismiss(animated: true)
+    }
 }

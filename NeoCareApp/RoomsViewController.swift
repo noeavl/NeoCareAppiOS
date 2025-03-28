@@ -10,16 +10,37 @@ import UIKit
 class RoomsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     
+    @IBOutlet weak var viewBtnCreate: UIView!
     @IBOutlet weak var tableViewRooms: UITableView!
     let roomsEndPoint = "http://34.215.209.108/api/v1/roomsNoPaginate"
     var rooms: [Room] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupActivityIndicator()
         tableViewRooms.dataSource = self
         tableViewRooms.delegate = self
+        viewBtnCreate.roundCorners([.allCorners], 100.0)
         
         getRooms()
     }
+    
+    private func setupActivityIndicator() {
+            view.addSubview(activityIndicator)
+            
+            NSLayoutConstraint.activate([
+                activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            ])
+        }
+    
+    private let activityIndicator: UIActivityIndicatorView = {
+           let indicator = UIActivityIndicatorView(style: .large)
+           indicator.color = .gray
+           indicator.translatesAutoresizingMaskIntoConstraints = false
+           return indicator
+       }()
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return rooms.count
     }
@@ -35,6 +56,13 @@ class RoomsViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "sgRoomsDetail", sender: rooms[indexPath.row])
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sgRoomsDetail",
+               let destinationVC = segue.destination as? RoomDetailViewController,
+               let selectedRoom = sender as? Room {
+                destinationVC.selectedRoom = selectedRoom
+            }
     }
     
     private func createURLRequest() throws -> URLRequest {
@@ -60,10 +88,15 @@ class RoomsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func getRooms(){
+        activityIndicator.startAnimating()
         do{
             let request = try createURLRequest()
             
             URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+                
+                DispatchQueue.main.async {
+                                    self?.activityIndicator.stopAnimating() // Detener en todas las respuestas
+                                }
                 
                 if let error = error {
                     self?.showError(message: "Network Error: \(error.localizedDescription)")
@@ -80,16 +113,22 @@ class RoomsViewController: UIViewController, UITableViewDataSource, UITableViewD
                     case 200...299:
                         self?.handleSuccessResponse(data: data)
                     default:
+                        
                         self?.showError(message: "Unkown Error")
                     }
                 }
             }.resume()
         } catch {
+            activityIndicator.stopAnimating()
             showError(message: "Error creating the request.")
         }
     }
     
     private func handleSuccessResponse(data: Data?) {
+        DispatchQueue.main.async {
+                   self.activityIndicator.stopAnimating()
+                   self.tableViewRooms.reloadData()
+               }
         guard let data = data else {
             showError(message: "Empty Response data.")
             return
@@ -98,17 +137,47 @@ class RoomsViewController: UIViewController, UITableViewDataSource, UITableViewD
         do {
             let roomsResponse = try JSONDecoder().decode(RoomsResponse.self, from: data)
             rooms = roomsResponse.rooms
-            print(rooms)
             DispatchQueue.main.async {
                 self.tableViewRooms.reloadData()
+            }
+            
+            if self.rooms.isEmpty {
+                self.showNoRoomsMessage()
+            } else {
+                self.hideNoRoomsMessage()
             }
         } catch {
             showError(message: "Error processing the response.")
         }
     }
     
+    private func showNoRoomsMessage() {
+        let messageLabel: UILabel = {
+            let label = UILabel()
+            label.text = "No rooms available"
+            label.textColor = .gray
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+            label.numberOfLines = 0
+            return label
+        }()
+        
+        // Crear un contenedor para el mensaje
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: tableViewRooms.bounds.width, height: 100))
+        messageLabel.frame = containerView.bounds
+        containerView.addSubview(messageLabel)
+        
+        // Establecer como vista de fondo
+        tableViewRooms.backgroundView = containerView
+    }
+    
+    private func hideNoRoomsMessage() {
+        tableViewRooms.backgroundView = nil
+    }
+    
     private func showError(message: String) {
         DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
             let alert = UIAlertController(
                 title: "Error",
                 message: message,
@@ -127,4 +196,5 @@ struct RoomsResponse: Decodable {
 struct Room: Decodable{
     let number: Int
     let name: String
+    let created_at: String
 }

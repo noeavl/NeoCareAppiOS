@@ -8,8 +8,11 @@
 import UIKit
 
 class RoomDetailViewController: UIViewController {
-    //var room: RoomsViewController.Room?
+    var selectedRoom: Room?
 
+    @IBOutlet weak var lblDate: UILabel!
+    @IBOutlet weak var lblNumber: UILabel!
+    @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var viewIconIncubator2: UIView!
     @IBOutlet weak var viewIconIncubator: UIView!
     @IBOutlet weak var viewRow: UIView!
@@ -21,7 +24,8 @@ class RoomDetailViewController: UIViewController {
     @IBOutlet weak var viewFecha: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setup()
+        
         // Do any additional setup after loading the view.
         viewFecha.roundCorners([.bottomRight], 20)
         viewID2.roundCorners([.bottomLeft, .bottomRight], 20)
@@ -32,6 +36,14 @@ class RoomDetailViewController: UIViewController {
         viewRow.roundCorners([.topRight,.topLeft,.bottomLeft], 20)
         viewIconIncubator.roundCorners([.allCorners], 100)
         viewIconIncubator2.roundCorners([.topLeft,.topRight], 20)
+    }
+    
+    private func setup(){
+        if let room = selectedRoom {
+            lblName.text = room.name
+            lblNumber.text = String(room.number)
+            lblDate.text = room.created_at
+        }
     }
     
     @IBAction func regresar() {
