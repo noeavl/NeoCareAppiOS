@@ -66,6 +66,9 @@ class VerificationViewController: UIViewController {
                 DispatchQueue.main.sync {
                     switch httpResponse.statusCode {
                     case 200...299:
+                        self?.txfEmail.text = ""
+                        self?.btnSend.isEnabled = false
+                        self?.view.endEditing(true)
                         self?.handleSuccessResponse(data: data)
                     case 422:
                         if let data = data{

@@ -27,8 +27,8 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var txfFirstsurname: UITextField!
     @IBOutlet weak var txfName: UITextField!
     
-    var hospitals: [String] = []
-    var selectedHospital: String? = nil
+    var hospitals: [Hospital] = []
+    var selectedHospital: Hospital? = nil
     var hospitalPlaceholder = "Select a Hospital"
     
     var hasStartedTypingName = false
@@ -39,8 +39,17 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var hasStartedTypingPassword = false
     var hasStartedTypingPasswordConfirm = false
     
+    let registerEndPoint = "http://34.215.209.108/api/v1/sessions/register-app"
+    let hospitalsNoPaginateEndPoint = "http://34.215.209.108/api/v1/hospitalsNoPaginate"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+        
+        getHospitals()
         
         pkvHospital.delegate = self
         pkvHospital.dataSource = self
@@ -100,6 +109,174 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
 
     @IBAction func register() {
+        view.endEditing(true)
+        
+        guard let name =
+                txfName.text?.trimmingCharacters(in: .whitespaces),
+              let firstName =
+              txfFirstsurname.text?.trimmingCharacters(in: .whitespaces),
+              let secondName =
+              txfSecondsurname.text?.trimmingCharacters(in: .whitespaces),
+              let username =
+              txfUsername.text?.trimmingCharacters(in: .whitespaces),
+              let email =
+              txfEmail.text?.trimmingCharacters(in: .whitespaces),
+              let password = txfPassword.text?.trimmingCharacters(in: .whitespaces),
+              let passwordConfirmation = txfPasswordConfirmation.text?.trimmingCharacters(in: .whitespaces),
+              let hospital = selectedHospital else {
+                showError(message: "Validation errors, please review the form.")
+                return
+            }
+        
+        
+        showLoadingIndicator()
+        
+        let registerRequest = RegisterRequest(name: name, last_name_1: firstName, last_name_2: secondName, username: username, email: email, password: password, password_confirmation: passwordConfirmation, hospital_id:hospital.id )
+        do {
+            let request = try createURLRequest(for: registerRequest)
+            
+            URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+                self?.hideLoadingIndicator()
+            
+                if let error = error {
+                    self?.showError(message: "Network Error: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    self?.showError(message: "Invalid Response.")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    switch httpResponse.statusCode {
+                    case 201:
+                        // Restablecer los valores.
+                        self?.txfName.text = ""
+                        self?.txfFirstsurname.text = ""
+                        self?.txfSecondsurname.text = ""
+                        self?.txfUsername.text = ""
+                        self?.txfEmail.text = ""
+                        self?.txfPassword.text = ""
+                        self?.txfPasswordConfirmation.text = ""
+                        self?.pkvHospital.selectRow(0, inComponent: 0, animated: true)
+                        self?.selectedHospital = nil
+                        self?.lblNameError.isHidden = true
+                        self?.lblFirstSurnameError.isHidden = true
+                        self?.lblSecondSurnameError.isHidden = true
+                        self?.lblUsernameError.isHidden = true
+                        self?.lblPasswordError.isHidden = true
+                        self?.lblPasswordConfirmationError.isHidden = true
+                        self?.btnRegister.isEnabled = false
+                        self?.view.endEditing(true)
+                        self?.handleSuccessResponse(data: data)
+                    case 422:
+                        if let data = data {
+                                self?.handleValidationErrors(data: data)
+                            } else {
+                                self?.showError(message: "Validation errors, please review the form.")
+                            }
+                    default:
+                        self?.showError(message: "Unknown Error.")
+                    }
+                    print(httpResponse)
+                }
+            }.resume()
+            
+        } catch {
+            hideLoadingIndicator()
+            showError(message: "Error creating the request.")
+        }
+    }
+    
+    private func handleValidationErrors(data: Data) {
+        do {
+            // Decodificar el JSON de errores
+            let errors = try JSONDecoder().decode([String: [String]].self, from: data)
+            
+            DispatchQueue.main.async { [weak self] in
+                // Limpiar errores previos
+                self?.lblNameError.isHidden = true
+                self?.lblFirstSurnameError.isHidden = true
+                self?.lblSecondSurnameError.isHidden = true
+                self?.lblUsernameError.isHidden = true
+                self?.lblEmailError.isHidden = true
+                self?.lblPasswordError.isHidden = true
+                self?.lblPasswordConfirmationError.isHidden = true
+                self?.lblHospitalError.isHidden = true
+                
+                // Mostrar errores por campo
+                if let nameErrors = errors["name"]?.joined(separator: "\n") {
+                    self?.lblNameError.text = nameErrors
+                    self?.lblNameError.isHidden = false
+                }
+                
+                if let firstNameErrors = errors["last_name_1"]?.joined(separator: "\n") {
+                    self?.lblFirstSurnameError.text = firstNameErrors
+                    self?.lblFirstSurnameError.isHidden = false
+                }
+                
+                if let secondNameErrors = errors["last_name_2"]?.joined(separator: "\n") {
+                    self?.lblSecondSurnameError.text = secondNameErrors
+                    self?.lblSecondSurnameError.isHidden = false
+                }
+                
+                if let usernameErrors = errors["username"]?.joined(separator: "\n") {
+                    self?.lblUsernameError.text = usernameErrors
+                    self?.lblUsernameError.isHidden = false
+                }
+                
+                if let emailErrors = errors["email"]?.joined(separator: "\n") {
+                    self?.lblEmailError.text = emailErrors
+                    self?.lblEmailError.isHidden = false
+                }
+                
+                if let passwordErrors = errors["password"]?.joined(separator: "\n") {
+                    self?.lblPasswordError.text = passwordErrors
+                    self?.lblPasswordError.isHidden = false
+                }
+            }
+        } catch {
+            showError(message: "Validation errors, please review the form.")
+        }
+    }
+    
+    private func handleSuccessResponse(data: Data?) {
+        guard let data = data else {
+            showError(message: "Empty Response data.")
+            return
+        }
+        
+        do {
+            let registerResponse = try JSONDecoder().decode(RegisterResponse.self, from: data)
+            let alert = UIAlertController(
+                title: "Success",
+                message: registerResponse.message,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+        } catch {
+            showError(message: "Error processing the response.")
+        }
+    }
+    
+    private func handleSuccessResponseHospitals(data: Data?) {
+        guard let data = data else {
+            showError(message: "Empty Response data.")
+            return
+        }
+        
+        do {
+            let hospitalsResponse = try JSONDecoder().decode(HospitalsResponse.self, from: data)
+            hospitals = hospitalsResponse.hospitals
+            DispatchQueue.main.async {
+                self.pkvHospital.reloadAllComponents()
+                self.textFieldDidChange()
+            }
+        } catch {
+            showError(message: "Error processing the response.")
+        }
     }
     
     @objc func nameDidBeginEditing() {
@@ -173,8 +350,6 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     @objc func textFieldDidChange() {
-        
-        
         let nameText = txfName.text?.trimmingCharacters(in: .whitespaces) ?? ""
         let firstSurnameText = txfFirstsurname.text?.trimmingCharacters(in: .whitespaces) ?? ""
         let secondSurnameText = txfSecondsurname.text?.trimmingCharacters(in: .whitespaces) ?? ""
@@ -289,8 +464,10 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             lblHospitalError.isHidden = false
             hospitalIsValid = false
         }
-                
-        btnRegister.isEnabled = nameIsValid && firstSurnameIsValid && secondSurnameIsValid && usernameIsValid && emailIsValid && passwordIsValid && passwordConfirmIsValid && hospitalIsValid
+        let hospitalsLoaded = !hospitals.isEmpty
+        hospitalIsValid = hospitalsLoaded && selectedHospital != nil
+        
+        btnRegister.isEnabled = nameIsValid && firstSurnameIsValid && secondSurnameIsValid && usernameIsValid && emailIsValid && passwordIsValid && passwordConfirmIsValid && hospitalIsValid && hospitalsLoaded
     }
     
     func isValidEmail(_ email: String) -> Bool {
@@ -307,7 +484,7 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         if hospitals.isEmpty{
             return "Loading Hospitals..."
         }
-        return row == 0 ? hospitalPlaceholder : hospitals[row - 1]
+        return row == 0 ? hospitalPlaceholder : hospitals[row - 1].name
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -323,35 +500,120 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             }
             textFieldDidChange()
     }
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        let label = (view as? UILabel) ?? UILabel()
-            
-        if hospitals.isEmpty {
-            label.text = "Loading hospitals..."
-            label.textColor = .gray
-        } else {
-            if row == 0 {
-                label.text = hospitalPlaceholder
-                label.textColor = .lightGray
-            } else {
-                label.text = hospitals[row - 1]
-                label.textColor = .black
-            }
-        }
-        
-        label.textAlignment = .center
-        return label
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
+    private func showError(message: String) {
+        DispatchQueue.main.async {
+            
+            self.lblNameError.isHidden = true
+            self.lblFirstSurnameError.isHidden = true
+            self.lblSecondSurnameError.isHidden = true
+            self.lblUsernameError.isHidden = true
+            self.lblEmailError.isHidden = true
+            self.lblPasswordError.isHidden = true
+            self.lblPasswordConfirmationError.isHidden = true
+            
+            let alert = UIAlertController(
+                title: "Error",
+                message: message,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+        }
+    }
+    private func showLoadingIndicator() {
+        btnRegister.configuration?.showsActivityIndicator = true
+        btnRegister.isEnabled = false
+    }
+    
+    private func hideLoadingIndicator() {
+        DispatchQueue.main.async {
+            self.btnRegister.configuration?.showsActivityIndicator = false
+            self.btnRegister.isEnabled = true
+        }
+    }
+    
+    private func createURLRequest(for registerRequest: RegisterRequest) throws -> URLRequest {
+        guard let url = URL(string: registerEndPoint) else {
+            throw NetworkError.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONEncoder().encode(registerRequest)
+        
+        return request
+    }
+    
+    private func createURLRequestHospitals() throws -> URLRequest {
+        guard let url = URL(string:hospitalsNoPaginateEndPoint ) else {
+            throw NetworkError.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        return request
+    }
+    
+    private func getHospitals(){
+        do{
+            let request = try createURLRequestHospitals()
+            
+            URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+                self?.hideLoadingIndicator()
+                
+                if let error = error {
+                    self?.showError(message: "Network Error: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    self?.showError(message: "Invalid Response.")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    switch httpResponse.statusCode {
+                    case 200...299:
+                        self?.handleSuccessResponseHospitals(data: data)
+                    default:
+                        self?.showError(message: "Unkown Error")
+                    }
+                }
+            }.resume()
+        } catch {
+            hideLoadingIndicator()
+            showError(message: "Error creating the request.")
+        }
+    }
 }
 
 struct RegisterRequest: Encodable {
+    let name: String
+    let last_name_1:String
+    let last_name_2:String
+    let username: String
     let email: String
     let password: String
+    let password_confirmation: String
+    let hospital_id:Int
 }
-
+struct HospitalsResponse: Decodable {
+    let message : String
+    let hospitals: [Hospital]
+}
 struct RegisterResponse: Decodable {
     let message: String
 }
 
+struct Hospital :Decodable {
+    let id:Int
+    let name:String
+}
 

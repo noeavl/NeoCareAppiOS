@@ -23,6 +23,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         // Cerrar el teclado cuando toca la vista de la pantalla.
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
@@ -82,7 +84,7 @@ class LoginViewController: UIViewController {
                     case 200...299:
                         self?.handleSuccessResponse(data: data)
                     case 401:
-                        self?.showError(message: "Invalid Credentials.")
+                        self?.handleWarningResponse(data: data)
                     case 422:
                         if let data = data {
                                 self?.handleValidationErrors(data: data)
@@ -149,8 +151,28 @@ class LoginViewController: UIViewController {
         
         do {
             let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
-            AuthManager.shared.saveToken(loginResponse.token)
+            AuthManager.shared.saveToken(loginResponse.token ?? "")
             self.navigateToHomeScreen()
+        } catch {
+            showError(message: "Error processing the response.")
+        }
+    }
+    
+    private func handleWarningResponse(data: Data?) {
+        guard let data = data else {
+            showError(message: "Empty Response data.")
+            return
+        }
+        
+        do {
+            let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
+            let alert = UIAlertController(
+                title: "Unauthorized",
+                message: loginResponse.message,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
         } catch {
             showError(message: "Error processing the response.")
         }
@@ -263,7 +285,8 @@ struct LoginRequest: Encodable {
 }
 
 struct LoginResponse: Decodable {
-    let token: String
+    let message: String
+    let token: String?
 }
 
 enum NetworkError: Error {
