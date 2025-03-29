@@ -9,6 +9,8 @@ import UIKit
 
 class IncubadorasViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    var selectedRoom: Room?
+    
     @IBOutlet weak var incubatorTbv: UITableView!
     struct Incubator{
         let babyName: String

@@ -50,6 +50,14 @@ class RoomDetailViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sgRoomsDetail",
+           let destinationVC = segue.destination as? IncubadorasViewController,
+               let selectedRoom = sender as? Room {
+                destinationVC.selectedRoom = selectedRoom
+            }
+    }
+    
     
     
     /*
