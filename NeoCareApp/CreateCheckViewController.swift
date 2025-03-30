@@ -33,4 +33,7 @@ class CreateCheckViewController: UIViewController, UITextViewDelegate {
     }
     */
 
+    @IBAction func regresar() {
+        dismiss(animated: true)
+    }
 }

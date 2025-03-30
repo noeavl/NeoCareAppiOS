@@ -8,6 +8,9 @@
 import UIKit
 
 class ChecksTableViewCell: UITableViewCell {
+    @IBOutlet weak var iconNurse: UIImageView!
+    @IBOutlet weak var viewId: UIView!
+    @IBOutlet weak var lblId: UILabel!
     @IBOutlet weak var viewTitle: UIView!
     @IBOutlet weak var viewIcons: UIView!
     @IBOutlet weak var viewCheck: UIView!
@@ -20,5 +23,6 @@ class ChecksTableViewCell: UITableViewCell {
         viewCheck.roundCorners([.topRight,.bottomRight], 20.0)
         viewTitle.roundCorners([.bottomRight], 20.0)
         viewIcons.roundCorners([.topLeft], 20.0)
+        viewId.roundCorners([.allCorners], 100.0)
     }
 }

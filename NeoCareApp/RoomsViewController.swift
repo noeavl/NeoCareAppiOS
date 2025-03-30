@@ -53,6 +53,7 @@ class RoomsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "sgRoomsDetail", sender: rooms[indexPath.row])
