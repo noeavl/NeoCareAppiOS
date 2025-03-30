@@ -151,7 +151,7 @@ class LoginViewController: UIViewController {
         
         do {
             let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
-            if loginResponse.role != "nurse" || loginResponse.role != "nurse-admin"{
+            if loginResponse.role != "nurse" && loginResponse.role != "nurse-admin"{
                 let alert = UIAlertController(
                     title: "Access Denied",
                     message: "Only nurses and nurse administrators are allowed.",
