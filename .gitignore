@@ -1,3 +1,54 @@
-# Xcode user-specific files
+# Xcode
+## User settings
+xcuserdata/
 *.xcuserstate
-*.xcuserdata
+
+## App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+.build/
+Packages/
+Package.pins
+Package.resolved
+
+# CocoaPods
+Pods/
+*.xcworkspace
+!default.xcworkspace
+
+# Carthage
+Carthage/Build/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Code Injection
+iOSInjectionProject/
+
+# OS X temporary files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Other
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+DerivedData/
+build/
