@@ -151,6 +151,16 @@ class LoginViewController: UIViewController {
         
         do {
             let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
+            if loginResponse.role != "nurse" || loginResponse.role != "nurse-admin"{
+                let alert = UIAlertController(
+                    title: "Access Denied",
+                    message: "Only nurses and nurse administrators are allowed.",
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alert, animated: true)
+                return
+            }
             AuthManager.shared.saveAuthData(
                 token: loginResponse.token ?? "",
                 role: loginResponse.role ?? "",
