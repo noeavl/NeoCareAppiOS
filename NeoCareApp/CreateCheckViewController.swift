@@ -25,9 +25,14 @@ class CreateCheckViewController: UIViewController, UITextViewDelegate, UIPickerV
     var hasStartedTypingDescription = false
     
     let babyIncubatorsNoPaginateEndPoint = "http://34.215.209.108/api/v1/babyIncubators"
+    let checksEndPoint = "http://34.215.209.108/api/v1/checks"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
         
         btnCreate.isEnabled = false
         pkvBabyIncubator.delegate = self
@@ -51,6 +56,10 @@ class CreateCheckViewController: UIViewController, UITextViewDelegate, UIPickerV
         txfTitle.addTarget(self, action: #selector(titleDidBeginEditing), for: .editingChanged)
         
         txfTitle.addTarget(self, action: #selector(titleDidEndEditing), for: .editingDidEnd)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     @objc func titleDidBeginEditing() {
@@ -154,6 +163,95 @@ class CreateCheckViewController: UIViewController, UITextViewDelegate, UIPickerV
         dismiss(animated: true)
     }
     @IBAction func create() {
+        view.endEditing(true)
+        
+        guard let title =
+                txfTitle.text?.trimmingCharacters(in: .whitespaces),
+              let description =
+                txfDescription.text?.trimmingCharacters(in: .whitespaces), !title.isEmpty,
+              let bbincubator = selectedBabyIncubator else {
+                showError(message: "Validation errors, please review the form.")
+                return
+            }
+        
+        showLoadingIndicator()
+        
+        let checkRequest = CheckRequest(baby_incubator_id: bbincubator.id, title: title, description: description)
+        
+        do {
+            let request = try createURLRequest(for: checkRequest)
+            
+            URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+                self?.hideLoadingIndicator()
+            
+                if let error = error {
+                    self?.showError(message: "Network Error: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    self?.showError(message: "Invalid Response.")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    switch httpResponse.statusCode {
+                    case 201:
+                        // Restablecer los valores.
+                        self?.txfTitle.text = ""
+                        self?.txfDescription.text = ""
+                        self?.lblTitleError.isHidden = true
+                        self?.lblDescriptionError.isHidden = true
+                        self?.lblBabyIncubatorError.isHidden = true
+                        self?.btnCreate.isEnabled = false
+                        self?.view.endEditing(true)
+                        self?.pkvBabyIncubator.selectRow(0, inComponent: 0, animated: true)
+                        self?.handleSuccessResponse(data: data)
+                    case 422:
+                        if let data = data {
+                                self?.handleValidationErrors(data: data)
+                            } else {
+                                self?.showError(message: "Validation errors, please review the form.")
+                            }
+                    default:
+                        self?.showError(message: "Unknown Error.")
+                    }
+                    print("EL RESPONSEEE DE CREATE:     ",httpResponse)
+                }
+            }.resume()
+            
+        } catch {
+            hideLoadingIndicator()
+            showError(message: "Error creating the request.")
+        }
+    }
+    private func handleValidationErrors(data: Data) {
+        do {
+            // Decodificar el JSON de errores
+            let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: data)
+            let errors = errorResponse.errors
+            
+            DispatchQueue.main.async { [weak self] in
+                // Limpiar errores previos
+                self?.lblTitleError.isHidden = true
+                self?.lblDescriptionError.isHidden = true
+                self?.lblBabyIncubatorError.isHidden = true
+                
+                // Mostrar errores por campo
+                if let titleErrors = errors["title"]?.joined(separator: "\n") {
+                    self?.lblTitleError.text = titleErrors
+                    self?.lblTitleError.isHidden = false
+                }
+                
+                if let descriptionErrors = errors["description"]?.joined(separator: "\n") {
+                    self?.lblDescriptionError.text = descriptionErrors
+                    self?.lblDescriptionError.isHidden = false
+                }
+            }
+            
+        } catch {
+            showError(message: "Validation errors, please review the form.")
+        }
     }
     
     private func createURLRequestBabyIncubators() throws -> URLRequest {
@@ -211,6 +309,45 @@ class CreateCheckViewController: UIViewController, UITextViewDelegate, UIPickerV
             self.btnCreate.isEnabled = true
         }
     }
+    private func showLoadingIndicator() {
+        btnCreate.configuration?.showsActivityIndicator = true
+        btnCreate.isEnabled = false
+    }
+    
+    private func handleSuccessResponse(data: Data?) {
+        guard let data = data else {
+            showError(message: "Empty Response data.")
+            return
+        }
+        
+        do {
+            let checkResponse = try JSONDecoder().decode(CheckResponse.self, from: data)
+            let alert = UIAlertController(
+                title: "Success",
+                message: checkResponse.msg,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+            
+        } catch {
+            showError(message: "Error processing the response.")
+        }
+    }
+    
+    private func createURLRequest(for checkRequest: CheckRequest) throws -> URLRequest {
+        guard let url = URL(string: checksEndPoint) else {
+            throw NetworkError.invalidURL
+        }
+        let token = AuthManager.shared.loadToken()!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer "+token, forHTTPHeaderField: "Authorization")
+        request.httpBody = try JSONEncoder().encode(checkRequest)
+        
+        return request
+    }
     
     private func getBabyIncubators(){
         do{
@@ -254,4 +391,14 @@ struct BabyIncubators :Decodable {
 
 struct BabyIncubatorsResponse: Decodable {
     let babyIncubators: [BabyIncubators]
+}
+
+struct CheckRequest: Encodable {
+    let baby_incubator_id: Int
+    let title:String
+    let description: String
+}
+
+struct CheckResponse: Decodable {
+    let msg: String
 }
