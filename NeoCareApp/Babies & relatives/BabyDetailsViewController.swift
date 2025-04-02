@@ -58,6 +58,12 @@ class BabyDetailsViewController: UIViewController, UITableViewDataSource {
                 destinationVC.babyID = selectedBaby?.id as? Int
             }
         }
+        
+        if segue.identifier == "sgAddIncubator" {
+            if let destinationVC = segue.destination as? AddIncubatorViewController {
+                destinationVC.babyID = selectedBaby?.id as? Int
+            }
+        }
     }
     
     @IBAction func Regresar() {

@@ -3782,13 +3782,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LkW-4Z-dhD">
-                                <rect key="frame" x="0.0" y="209" width="393" height="162"/>
+                                <rect key="frame" x="0.0" y="119" width="393" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="162" id="a5d-SB-Gid"/>
                                 </constraints>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select an incubator" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdt-y5-Kh6">
-                                <rect key="frame" x="0.0" y="140" width="393" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select an available incubator" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdt-y5-Kh6">
+                                <rect key="frame" x="0.0" y="80" width="393" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="QEs-HI-EBD"/>
                                 </constraints>
@@ -3809,13 +3809,13 @@
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yuf-Kg-Nnx">
-                                <rect key="frame" x="0.0" y="480" width="393" height="162"/>
+                                <rect key="frame" x="0.0" y="361" width="393" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="162" id="Jxc-rJ-e5h"/>
                                 </constraints>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a nurse" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkH-rB-Rul">
-                                <rect key="frame" x="0.0" y="411" width="393" height="29"/>
+                                <rect key="frame" x="0.0" y="322" width="393" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="nQf-xg-f9A"/>
                                 </constraints>
@@ -3824,7 +3824,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07h-u4-C1U">
-                                <rect key="frame" x="96.666666666666686" y="700" width="200" height="50"/>
+                                <rect key="frame" x="96.666666666666686" y="564" width="200" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="F6o-sX-Arf"/>
@@ -3840,7 +3840,22 @@
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="baseBackgroundColor" name="violeta"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="crear:" destination="1s5-Uc-R3F" eventType="touchUpInside" id="gbw-XO-K1l"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incubador Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0UB-jL-L2k">
+                                <rect key="frame" x="0.0" y="291" width="393" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nurse Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4D4-15-MBu">
+                                <rect key="frame" x="0.0" y="533" width="393" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="L9L-Yl-SCP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3848,26 +3863,39 @@
                             <constraint firstItem="vOU-An-BmU" firstAttribute="centerX" secondItem="vO3-Rr-IaH" secondAttribute="centerX" id="4sT-Nm-VAB"/>
                             <constraint firstItem="vOU-An-BmU" firstAttribute="top" secondItem="9fd-q2-nYi" secondAttribute="top" id="6LR-Qf-0vd"/>
                             <constraint firstItem="LkW-4Z-dhD" firstAttribute="leading" secondItem="L9L-Yl-SCP" secondAttribute="leading" id="A0j-jG-BES"/>
-                            <constraint firstItem="07h-u4-C1U" firstAttribute="top" secondItem="Yuf-Kg-Nnx" secondAttribute="bottom" constant="58" id="Ayq-mi-qCK"/>
                             <constraint firstItem="LkW-4Z-dhD" firstAttribute="trailing" secondItem="Fdt-y5-Kh6" secondAttribute="trailing" id="FJu-bx-XSr"/>
                             <constraint firstItem="07h-u4-C1U" firstAttribute="centerX" secondItem="vO3-Rr-IaH" secondAttribute="centerX" id="Gvu-xO-KCE"/>
+                            <constraint firstItem="dkH-rB-Rul" firstAttribute="top" secondItem="0UB-jL-L2k" secondAttribute="bottom" constant="10" id="Gx7-Ty-AQU"/>
                             <constraint firstItem="vOU-An-BmU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9fd-q2-nYi" secondAttribute="trailing" constant="4.3333333333333428" id="IMe-kI-mEE"/>
                             <constraint firstItem="LkW-4Z-dhD" firstAttribute="leading" secondItem="Fdt-y5-Kh6" secondAttribute="leading" id="Il5-1R-REj"/>
                             <constraint firstItem="Yuf-Kg-Nnx" firstAttribute="trailing" secondItem="dkH-rB-Rul" secondAttribute="trailing" id="KBh-6m-9Lk"/>
-                            <constraint firstItem="Yuf-Kg-Nnx" firstAttribute="top" secondItem="dkH-rB-Rul" secondAttribute="bottom" constant="40" id="NmD-UT-ESj"/>
+                            <constraint firstItem="Yuf-Kg-Nnx" firstAttribute="top" secondItem="dkH-rB-Rul" secondAttribute="bottom" constant="10" id="NmD-UT-ESj"/>
                             <constraint firstItem="Yuf-Kg-Nnx" firstAttribute="leading" secondItem="dkH-rB-Rul" secondAttribute="leading" id="VU6-yG-MHj"/>
                             <constraint firstItem="9fd-q2-nYi" firstAttribute="leading" secondItem="L9L-Yl-SCP" secondAttribute="leading" id="Wof-Zx-XpM"/>
                             <constraint firstItem="dkH-rB-Rul" firstAttribute="leading" secondItem="LkW-4Z-dhD" secondAttribute="leading" id="XdL-Im-fgu"/>
+                            <constraint firstItem="4D4-15-MBu" firstAttribute="top" secondItem="Yuf-Kg-Nnx" secondAttribute="bottom" constant="10" id="ZhR-O5-HkU"/>
                             <constraint firstItem="vOU-An-BmU" firstAttribute="bottom" secondItem="9fd-q2-nYi" secondAttribute="bottom" id="bof-on-fZ5"/>
+                            <constraint firstItem="0UB-jL-L2k" firstAttribute="leading" secondItem="LkW-4Z-dhD" secondAttribute="leading" id="ekY-3h-iXG"/>
                             <constraint firstItem="dkH-rB-Rul" firstAttribute="trailing" secondItem="LkW-4Z-dhD" secondAttribute="trailing" id="fCI-Zw-b8O"/>
                             <constraint firstItem="vOU-An-BmU" firstAttribute="top" secondItem="L9L-Yl-SCP" secondAttribute="top" id="fh6-7I-AbH"/>
+                            <constraint firstItem="4D4-15-MBu" firstAttribute="leading" secondItem="Yuf-Kg-Nnx" secondAttribute="leading" id="g58-3B-Y4v"/>
                             <constraint firstItem="LkW-4Z-dhD" firstAttribute="trailing" secondItem="L9L-Yl-SCP" secondAttribute="trailing" id="hDp-8d-MMx"/>
-                            <constraint firstItem="Fdt-y5-Kh6" firstAttribute="top" secondItem="vOU-An-BmU" secondAttribute="bottom" constant="70" id="lv9-aP-lEE"/>
-                            <constraint firstItem="dkH-rB-Rul" firstAttribute="top" secondItem="LkW-4Z-dhD" secondAttribute="bottom" constant="40" id="oXq-qy-vSV"/>
+                            <constraint firstItem="Fdt-y5-Kh6" firstAttribute="top" secondItem="vOU-An-BmU" secondAttribute="bottom" constant="10" id="lv9-aP-lEE"/>
+                            <constraint firstItem="0UB-jL-L2k" firstAttribute="top" secondItem="LkW-4Z-dhD" secondAttribute="bottom" constant="10" id="oXM-9N-gAm"/>
+                            <constraint firstItem="4D4-15-MBu" firstAttribute="trailing" secondItem="Yuf-Kg-Nnx" secondAttribute="trailing" id="phe-Wf-Tjr"/>
                             <constraint firstItem="9fd-q2-nYi" firstAttribute="top" secondItem="L9L-Yl-SCP" secondAttribute="top" id="tlT-m8-q7e"/>
-                            <constraint firstItem="LkW-4Z-dhD" firstAttribute="top" secondItem="Fdt-y5-Kh6" secondAttribute="bottom" constant="40" id="w81-RI-lcO"/>
+                            <constraint firstItem="07h-u4-C1U" firstAttribute="top" secondItem="4D4-15-MBu" secondAttribute="bottom" constant="10" id="w01-PR-L3g"/>
+                            <constraint firstItem="LkW-4Z-dhD" firstAttribute="top" secondItem="Fdt-y5-Kh6" secondAttribute="bottom" constant="10" id="w81-RI-lcO"/>
+                            <constraint firstItem="0UB-jL-L2k" firstAttribute="trailing" secondItem="LkW-4Z-dhD" secondAttribute="trailing" id="yZH-59-kaH"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnCreate" destination="07h-u4-C1U" id="u2Y-Xx-Mzg"/>
+                        <outlet property="lblIncubatorError" destination="0UB-jL-L2k" id="pDs-6f-xcv"/>
+                        <outlet property="lblNurseError" destination="4D4-15-MBu" id="U6c-FS-NJF"/>
+                        <outlet property="pkvIncubator" destination="LkW-4Z-dhD" id="b3L-QL-Fzf"/>
+                        <outlet property="pkvNurse" destination="Yuf-Kg-Nnx" id="C8h-AK-30d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WLC-Fh-Rco" sceneMemberID="firstResponder"/>
             </objects>
@@ -4310,7 +4338,7 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Button" image="incubator-icon.png"/>
                                         <connections>
-                                            <segue destination="1s5-Uc-R3F" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="Bml-kx-uYO"/>
+                                            <segue destination="1s5-Uc-R3F" kind="presentation" identifier="sgAddIncubator" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="Bml-kx-uYO"/>
                                         </connections>
                                     </button>
                                 </subviews>
