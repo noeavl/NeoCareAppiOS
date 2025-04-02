@@ -349,12 +349,12 @@ class CreateBabyViewController: UIViewController, UITextFieldDelegate{
                         self?.lblBirthdateError.isHidden = false
                     }
                     
-                    if let motherErrors = errors["mother_surname"]?.joined(separator: "\n") {
+                    if let motherErrors = errors["last_name_2"]?.joined(separator: "\n") {
                         self?.lblMotherError.text = motherErrors
                         self?.lblMotherError.isHidden = false
                     }
                     
-                    if let fatherErrors = errors["father_surname"]?.joined(separator: "\n") {
+                    if let fatherErrors = errors["last_name_1"]?.joined(separator: "\n") {
                         self?.lblFatherError.text = fatherErrors
                         self?.lblFatherError.isHidden = false
                     }

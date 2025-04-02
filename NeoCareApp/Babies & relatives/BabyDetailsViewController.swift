@@ -36,11 +36,11 @@ class BabyDetailsViewController: UIViewController, UITableViewDataSource {
         viewAddFamiliar.roundCorners([.allCorners], 30.0)
         viewInfo.roundCorners([.allCorners], 30.0)
         viewBgInfo.roundCorners([.allCorners], 30.0)
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         getRelatives()
-        
-
-                    
     }
     
     public func setup(){
