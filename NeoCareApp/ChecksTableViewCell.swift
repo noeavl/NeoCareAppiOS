@@ -20,6 +20,10 @@ class ChecksTableViewCell: UITableViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        let viewsToUpdate = [viewCheck, viewTitle, viewIcons, viewId]
+        viewsToUpdate.forEach { $0?.layoutIfNeeded() }
+        
         viewCheck.roundCorners([.topRight,.bottomRight], 20.0)
         viewTitle.roundCorners([.bottomRight], 20.0)
         viewIcons.roundCorners([.topLeft], 20.0)

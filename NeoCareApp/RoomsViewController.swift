@@ -16,12 +16,12 @@ class RoomsViewController: UIViewController, UITableViewDataSource, UITableViewD
     var rooms: [Room] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupActivityIndicator()
         tableViewRooms.dataSource = self
         tableViewRooms.delegate = self
         viewBtnCreate.roundCorners([.allCorners], 100.0)
-        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        setupActivityIndicator()
         getRooms()
     }
     

@@ -22,11 +22,12 @@ class ChecksViewController: UIViewController, UITableViewDataSource , UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupActivityIndicator()
         tableViewChecks.dataSource = self
         tableViewChecks.delegate = self
         viewBtnCreate.roundCorners([.allCorners], 100.0)
-        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        setupActivityIndicator()
         getChecks()
     }
     

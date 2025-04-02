@@ -8,7 +8,11 @@
 import UIKit
 
 class IncubatorDetailViewController: UIViewController {
+    var selectedIncubator:Incubator?
 
+    @IBOutlet weak var lblNurse: UILabel!
+    @IBOutlet weak var lblBaby: UILabel!
+    @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var backgroundBabyView: UIView!
     @IBOutlet weak var iconBabyView: UIView!
     @IBOutlet weak var labelbabyeView: UIView!
@@ -27,29 +31,34 @@ class IncubatorDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        backgroundBabyView.layer.cornerRadius = 38.0
+        lblNurse.text = selectedIncubator?.nurseName
+        lblBaby.text = selectedIncubator?.babyName
+        lblDate.text = selectedIncubator?.created_at
+        
+        backgroundBabyView.roundCorners([.allCorners], 100.0)
         labelbabyeView.layer.cornerRadius = 32.0
         backgroundNurseView.layer.cornerRadius = 38.0
         labelNurseView.layer.cornerRadius = 32.0
-        backgroundDateView.layer.cornerRadius = 38.0
+        idView.roundCorners([.topLeft, .topRight, .bottomLeft, .bottomRight], 100.0)
+        backgroundDateView.roundCorners([.topLeft,.topLeft, .bottomLeft, .bottomRight], 100.0)
+        idView.roundCorners([.allCorners], 100.0)
 
         func makeCircular(_ view: UIView) {
-                let size = min(view.frame.width, view.frame.height) // Asegurar tamaño cuadrado
+                let size = min(view.frame.width, view.frame.height)
                 view.layer.cornerRadius = size / 2
                 view.clipsToBounds = true
-                view.layer.masksToBounds = true // Suavizar bordes
+                view.layer.masksToBounds = true
             }
 
         makeCircular(iconBabyView)
         makeCircular(iconNurseView)
         makeCircular(dateView)
-        makeCircular(idView)
         makeCircular(dataButtonView)
         makeCircular(incubatorButtonView)
     }

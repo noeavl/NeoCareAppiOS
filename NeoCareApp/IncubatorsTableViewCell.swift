@@ -9,6 +9,7 @@ import UIKit
 
 class IncubatorsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var lblId: UILabel!
     @IBOutlet weak var incubatorView: UIView!
     @IBOutlet weak var superViewIncubator: UIView!
     @IBOutlet weak var babyNameView: UIView!
