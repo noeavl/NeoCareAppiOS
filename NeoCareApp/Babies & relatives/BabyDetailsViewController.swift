@@ -24,6 +24,10 @@ class BabyDetailsViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var viewBgInfo: UIView!
     @IBOutlet weak var viewInfo: UIView!
+    
+    
+    @IBOutlet weak var lblNotFound: UILabel!
+    
     //inicializador
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +35,8 @@ class BabyDetailsViewController: UIViewController, UITableViewDataSource {
         
         setupActivityIndicator()
         tableViewRelatives.dataSource = self
+        
+        lblNotFound.isHidden = true
         
         viewAddIncubator.roundCorners([.allCorners], 30.0)
         viewAddFamiliar.roundCorners([.allCorners], 30.0)
@@ -41,6 +47,17 @@ class BabyDetailsViewController: UIViewController, UITableViewDataSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getRelatives()
+        
+        if let baby = selectedBaby {
+            if baby.incubator_id == nil {
+                viewAddIncubator.isHidden = false
+            }
+            else{
+                viewAddIncubator.isHidden = true
+            }
+        }
+        
+        lblNotFound.isHidden = true
     }
     
     public func setup(){
@@ -132,7 +149,9 @@ class BabyDetailsViewController: UIViewController, UITableViewDataSource {
                     case 401:
                         self?.showError(message: "No autorizado - token inválido")
                     case 404:
-                        self?.showError(message: "No se encontraron familiares para este bebé")
+                        /*
+                        self?.showError(message: "No se encontraron familiares para este bebé") */
+                        self?.lblNotFound.isHidden = false
                     case 500:
                         self?.showError(message: "Error interno del servidor")
                     default:

@@ -3275,10 +3275,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="104" height="49.666666666666664"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="humity.png" translatesAutoresizingMaskIntoConstraints="NO" id="nL5-PA-kUA">
-                                                        <rect key="frame" x="21.666666666666686" y="10.000000000000002" width="31.333333333333329" height="29.666666666666671"/>
+                                                        <rect key="frame" x="21.666666666666686" y="10" width="31.333333333333329" height="28"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYy-qf-cic">
-                                                        <rect key="frame" x="53.000000000000028" y="10.000000000000002" width="50" height="29.666666666666671"/>
+                                                        <rect key="frame" x="53.000000000000028" y="10" width="50" height="28"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -3366,10 +3366,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="104.33333333333333" height="49.666666666666664"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sound.png" translatesAutoresizingMaskIntoConstraints="NO" id="wXf-Zt-EnI">
-                                                        <rect key="frame" x="32.666666666666671" y="10" width="31.333333333333329" height="24"/>
+                                                        <rect key="frame" x="32.666666666666671" y="10.000000000000002" width="31.333333333333329" height="29.666666666666671"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="55%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4JP-hE-cpH">
-                                                        <rect key="frame" x="63.999999999999993" y="10" width="28.666666666666664" height="24"/>
+                                                        <rect key="frame" x="63.999999999999993" y="10.000000000000002" width="28.666666666666664" height="29.666666666666671"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -3456,10 +3456,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="104.33333333333333" height="49.666666666666664"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movement.png" translatesAutoresizingMaskIntoConstraints="NO" id="avK-Rw-okJ">
-                                                        <rect key="frame" x="22.999999999999996" y="10" width="41.666666666666657" height="20"/>
+                                                        <rect key="frame" x="22.999999999999996" y="10.000000000000002" width="41.666666666666657" height="29.666666666666671"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPd-Dh-azo">
-                                                        <rect key="frame" x="64.666666666666657" y="10" width="27" height="20"/>
+                                                        <rect key="frame" x="64.666666666666657" y="10.000000000000002" width="27" height="29.666666666666671"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -3546,10 +3546,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="104.33333333333333" height="49.666666666666664"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="light.png" translatesAutoresizingMaskIntoConstraints="NO" id="4xj-Lt-awQ">
-                                                        <rect key="frame" x="22" y="10" width="31.333333333333329" height="32"/>
+                                                        <rect key="frame" x="22" y="10.000000000000002" width="31.333333333333329" height="29.666666666666671"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="55%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aF-hz-gmM">
-                                                        <rect key="frame" x="53.333333333333329" y="10" width="50" height="32"/>
+                                                        <rect key="frame" x="53.333333333333329" y="10.000000000000002" width="50" height="29.666666666666671"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -3809,13 +3809,13 @@
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yuf-Kg-Nnx">
-                                <rect key="frame" x="0.0" y="361" width="393" height="162"/>
+                                <rect key="frame" x="0.0" y="360.33333333333331" width="393" height="161.99999999999994"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="162" id="Jxc-rJ-e5h"/>
                                 </constraints>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a nurse" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkH-rB-Rul">
-                                <rect key="frame" x="0.0" y="322" width="393" height="29"/>
+                                <rect key="frame" x="0.0" y="321.33333333333331" width="393" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="nQf-xg-f9A"/>
                                 </constraints>
@@ -3824,7 +3824,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07h-u4-C1U">
-                                <rect key="frame" x="96.666666666666686" y="564" width="200" height="50"/>
+                                <rect key="frame" x="96.666666666666686" y="562.66666666666663" width="200" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="F6o-sX-Arf"/>
@@ -3844,14 +3844,14 @@
                                     <action selector="crear:" destination="1s5-Uc-R3F" eventType="touchUpInside" id="gbw-XO-K1l"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incubador Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0UB-jL-L2k">
-                                <rect key="frame" x="0.0" y="291" width="393" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incubador Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0UB-jL-L2k">
+                                <rect key="frame" x="0.0" y="291" width="393" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nurse Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4D4-15-MBu">
-                                <rect key="frame" x="0.0" y="533" width="393" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nurse Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4D4-15-MBu">
+                                <rect key="frame" x="0.0" y="532.33333333333337" width="393" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
@@ -4350,6 +4350,12 @@
                                     <constraint firstAttribute="width" constant="80" id="m1B-4f-SJP"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No relatives were found for this baby." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5l-IB-uaa">
+                                <rect key="frame" x="20" y="439" width="353" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="McS-ML-DKk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -4364,6 +4370,7 @@
                             <constraint firstItem="OTR-GJ-hQq" firstAttribute="leading" secondItem="McS-ML-DKk" secondAttribute="leading" constant="20" id="QJN-0s-tGb"/>
                             <constraint firstItem="pA8-6M-B5P" firstAttribute="top" secondItem="OTR-GJ-hQq" secondAttribute="bottom" constant="10" id="UG3-ck-EGQ"/>
                             <constraint firstItem="TbJ-1w-Evl" firstAttribute="trailing" secondItem="pA8-6M-B5P" secondAttribute="trailing" id="UYW-fC-Acc"/>
+                            <constraint firstItem="9XZ-iY-Oke" firstAttribute="top" secondItem="m5l-IB-uaa" secondAttribute="bottom" constant="120" id="We8-C9-jlt"/>
                             <constraint firstItem="cov-Tc-hh3" firstAttribute="centerX" secondItem="srH-Q4-xpG" secondAttribute="centerX" id="XEN-SQ-whM"/>
                             <constraint firstItem="TbJ-1w-Evl" firstAttribute="top" secondItem="pA8-6M-B5P" secondAttribute="bottom" constant="20" id="Xgb-l0-kBw"/>
                             <constraint firstItem="cov-Tc-hh3" firstAttribute="bottom" secondItem="lFp-OB-yHQ" secondAttribute="bottom" id="boB-Np-FqY"/>
@@ -4372,13 +4379,17 @@
                             <constraint firstItem="lFp-OB-yHQ" firstAttribute="leading" secondItem="McS-ML-DKk" secondAttribute="leading" constant="20" id="cct-8x-CrF"/>
                             <constraint firstItem="McS-ML-DKk" firstAttribute="trailing" secondItem="pA8-6M-B5P" secondAttribute="trailing" constant="20" id="dZN-RB-bTz"/>
                             <constraint firstItem="pA8-6M-B5P" firstAttribute="leading" secondItem="McS-ML-DKk" secondAttribute="leading" constant="20" id="heu-iF-Spf"/>
+                            <constraint firstItem="m5l-IB-uaa" firstAttribute="trailing" secondItem="OTR-GJ-hQq" secondAttribute="trailing" id="kT6-Hf-X1Q"/>
                             <constraint firstItem="pA8-6M-B5P" firstAttribute="leading" secondItem="rOa-Td-prv" secondAttribute="leading" id="nuf-QC-JOG"/>
+                            <constraint firstItem="m5l-IB-uaa" firstAttribute="leading" secondItem="OTR-GJ-hQq" secondAttribute="leading" id="ue7-MA-06S"/>
                             <constraint firstItem="TbJ-1w-Evl" firstAttribute="leading" secondItem="9XZ-iY-Oke" secondAttribute="trailing" constant="20" id="ux4-rJ-KYZ"/>
+                            <constraint firstItem="m5l-IB-uaa" firstAttribute="centerX" secondItem="srH-Q4-xpG" secondAttribute="centerX" id="yrI-NK-tNP"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="lblBirthDate" destination="BGa-Pv-NmG" id="6Ie-ta-AgV"/>
                         <outlet property="lblNombre" destination="a1r-Gc-uVh" id="hEi-wj-CXr"/>
+                        <outlet property="lblNotFound" destination="m5l-IB-uaa" id="RrF-Eb-KYo"/>
                         <outlet property="tableViewRelatives" destination="pA8-6M-B5P" id="rXL-sp-6kG"/>
                         <outlet property="viewAddFamiliar" destination="TbJ-1w-Evl" id="YMC-vk-GEf"/>
                         <outlet property="viewAddIncubator" destination="9XZ-iY-Oke" id="p2F-8g-CAC"/>

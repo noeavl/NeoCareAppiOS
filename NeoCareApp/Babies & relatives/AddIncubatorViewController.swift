@@ -121,7 +121,7 @@ class AddIncubatorViewController: UIViewController {
                             }
                         } catch {
                             DispatchQueue.main.async {
-                                self.lblIncubatorError.text = "Error de decodificación: \(error.localizedDescription)"
+                                self.lblIncubatorError.text = "No incubators were found available"
                                 self.lblIncubatorError.isHidden = false
                             }
                         }
@@ -160,7 +160,7 @@ class AddIncubatorViewController: UIViewController {
                                 }
                             } catch {
                                 DispatchQueue.main.async {
-                                    self.lblNurseError.text = "Error de decodificación: \(error.localizedDescription)"
+                                    self.lblNurseError.text = "No nurses were found"
                                     self.lblNurseError.isHidden = false
                                 }
                             }
@@ -238,8 +238,8 @@ extension AddIncubatorViewController: UIPickerViewDataSource, UIPickerViewDelega
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == pkvIncubator {
-            let incubator = incubators[row]
-            return "Incubator \(incubator.id)"
+                let incubator = incubators[row]
+                return "Incubator \(incubator.id)"
         } else if pickerView == pkvNurse {
             let nurse = nurses[row]
             return nurse.full_name

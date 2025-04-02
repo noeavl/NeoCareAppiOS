@@ -202,17 +202,26 @@ class AddFamiliarViewController: UIViewController {
                     lblPhoneError.text = "Phone is required."
                     lblPhoneError.isHidden = false
                 }
-                else{
+                
+                else if phoneText.count != 10 {
+                    lblPhoneError.text = "Phone must be 10 digits long."
+                    lblPhoneError.isHidden = false
+                } else {
+                    
                     // Aquí podrías agregar validación adicional para el formato de la fecha
                     lblPhoneError.isHidden = true
                     phoneIsValid = true
                 }
+                
             }
         
             if hasStartedTypingBirthdate {
                
                 if emailText.isEmpty {
                     lblEmailError.text = "Email is required."
+                    lblEmailError.isHidden = false
+                } else if !isValidEmail(emailText) {
+                    lblEmailError.text = "The email must be a valid email address."
                     lblEmailError.isHidden = false
                 }
                 else{
@@ -439,6 +448,12 @@ class AddFamiliarViewController: UIViewController {
                 self.btnCreate.configuration?.showsActivityIndicator = false
                 self.btnCreate.isEnabled = true
             }
+    }
+    
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
     }
     
 }
