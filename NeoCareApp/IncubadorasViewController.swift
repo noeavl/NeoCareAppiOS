@@ -32,7 +32,7 @@ class IncubadorasViewController: UIViewController, UITableViewDataSource, UITabl
         viewBtnCreate.roundCorners([.allCorners], 100.0)
     }
     override func viewWillAppear(_ animated: Bool) {
-        <#code#>
+        // yiyi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
