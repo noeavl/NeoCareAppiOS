@@ -38,6 +38,9 @@ class BabyDetailsViewController: UIViewController, UITableViewDataSource {
         viewBgInfo.roundCorners([.allCorners], 30.0)
         
         getRelatives()
+        
+
+                    
     }
     
     public func setup(){
@@ -46,6 +49,14 @@ class BabyDetailsViewController: UIViewController, UITableViewDataSource {
             lblBirthDate.text = baby.date_of_birth
         } else{
             print("selectedBaby es nil")
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sgCreateFamiliar" {
+            if let destinationVC = segue.destination as? AddFamiliarViewController {
+                destinationVC.babyID = selectedBaby?.id as? Int
+            }
         }
     }
     

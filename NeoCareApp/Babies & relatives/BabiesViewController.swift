@@ -28,9 +28,13 @@ class BabiesViewController: UIViewController, UITableViewDataSource, UITableView
             tableViewBabies.delegate = self
             viewAdd.roundCorners([.allCorners], 100.0)
             
-            getBabies()
+           
         }
         
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            getBabies()
+        }
         private func setupActivityIndicator() {
                 view.addSubview(activityIndicator)
                 
