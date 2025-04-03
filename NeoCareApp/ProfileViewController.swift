@@ -9,27 +9,28 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var lblRfc: UILabel!
+    @IBOutlet weak var lblEmail: UILabel!
+    @IBOutlet weak var lblFullName: UILabel!
     @IBOutlet weak var imvProfile: UIImageView!
     let loginEndpoint = "http://34.215.209.108/api/v1/sessions/logout"
+    let profileEndpoint = "http://34.215.209.108/api/v1/profile/me"
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getProfile()
     }
     
     @IBAction func regresar() {
         dismiss(animated: true)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     @IBAction func logout() {
         
         let alert = UIAlertController(
@@ -38,10 +39,8 @@ class ProfileViewController: UIViewController {
                 preferredStyle: .alert
             )
             
-            // Acción para confirmar el logout
             let confirmAction = UIAlertAction(title: "Log Out", style: .destructive) { _ in
             
-                // Consumo de la ruta de logout para borrar el token de la API
                 do{
                     let request = try self.createURLRequest()
                     URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
@@ -69,11 +68,9 @@ class ProfileViewController: UIViewController {
                     self.showToast(message: "Error creating the request.")
                 }
                 
-            // Borrar el token del singleton y redireccionar.
             AuthManager.shared.logout()
             }
             
-            // Acción para cancelar
             let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel)
             
             alert.addAction(confirmAction)
@@ -82,7 +79,43 @@ class ProfileViewController: UIViewController {
             present(alert, animated: true, completion: nil)
     }
     
-    // Alerta/Toast se quita automaticamente.
+    private func getProfile() {
+        do {
+            let request = try self.createURLRequestProfile()
+            URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+                
+                if let error = error {
+                    DispatchQueue.main.async {
+                        self?.showToast(message: "\(error.localizedDescription)", title: "Network Error")
+                    }
+                    return
+                }
+                
+                guard let data = data else {
+                    DispatchQueue.main.async {
+                        self?.showToast(message: "No se recibió información", title: "Error")
+                    }
+                    return
+                }
+                
+                do {
+                    let profileResponse = try JSONDecoder().decode(ProfileResponse.self, from: data)
+                    DispatchQueue.main.async {
+                        self?.lblFullName.text = profileResponse.data.full_name
+                        self?.lblEmail.text = profileResponse.data.email
+                        self?.lblRfc.text = profileResponse.data.rfc ?? "RFC not found"                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        self?.showToast(message: "Error al procesar los datos: \(error.localizedDescription)", title: "Parsing Error")
+                    }
+                }
+            }.resume()
+        } catch {
+            self.showToast(message: "Error creando la solicitud.", title: "Request Error")
+        }
+    }
+
+    
     private func showToast(message: String,
                           duration: TimeInterval = 1.5,
                           title: String? = nil,
@@ -120,4 +153,30 @@ class ProfileViewController: UIViewController {
         return request
     }
     
+    private func createURLRequestProfile() throws -> URLRequest {
+        guard let url = URL(string: profileEndpoint) else {
+            throw NetworkError.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue(String("application/json"), forHTTPHeaderField: "Content-Type")
+        if let token = AuthManager.shared.loadToken() {
+            request.addValue(String("Bearer \(token)"), forHTTPHeaderField: "Authorization")
+        }
+        
+        return request
+    }
+    
 }
+
+struct ProfileResponse: Codable {
+    let data: ProfileData
+}
+
+struct ProfileData: Codable {
+    let full_name: String
+    let email: String
+    let rfc: String?
+}
+

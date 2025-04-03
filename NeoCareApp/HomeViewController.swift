@@ -18,6 +18,5 @@ class HomeViewController: UIViewController{
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        welcomeView.layer.cornerRadius = 10.0
     }
 }
