@@ -309,6 +309,7 @@ class CreateCheckViewController: UIViewController, UITextViewDelegate, UIPickerV
             self.btnCreate.isEnabled = true
         }
     }
+    
     private func showLoadingIndicator() {
         btnCreate.configuration?.showsActivityIndicator = true
         btnCreate.isEnabled = false

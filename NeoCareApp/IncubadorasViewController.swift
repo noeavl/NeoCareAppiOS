@@ -216,21 +216,6 @@ class IncubadorasViewController: UIViewController, UITableViewDataSource, UITabl
             self.present(alert, animated: true)
         }
     }
-    @IBAction func crear() {
-        let alert = UIAlertController(
-            title: "Confirmation",
-            message: "Do you want to create a new incubator?",
-            preferredStyle: .alert
-        )
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
-            // Implement the logic to create a new incubator here
-        }))
-        
-        self.present(alert, animated: true)
-    }
 }
 
 struct Incubator: Decodable{
