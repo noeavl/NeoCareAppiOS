@@ -103,7 +103,7 @@ class ProfileViewController: UIViewController {
                     DispatchQueue.main.async {
                         self?.lblFullName.text = profileResponse.data.full_name
                         self?.lblEmail.text = profileResponse.data.email
-                        self?.lblRfc.text = profileResponse.data.rfc ?? "RFC not found"                    }
+                    }
                 } catch {
                     DispatchQueue.main.async {
                         self?.showToast(message: "Error al procesar los datos: \(error.localizedDescription)", title: "Parsing Error")

@@ -3229,10 +3229,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="104.33333333333333" height="49.666666666666664"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sound.png" translatesAutoresizingMaskIntoConstraints="NO" id="wXf-Zt-EnI">
-                                                        <rect key="frame" x="32.666666666666671" y="10.000000000000002" width="31.333333333333329" height="29.666666666666671"/>
+                                                        <rect key="frame" x="32.666666666666671" y="10" width="31.333333333333329" height="24"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="55%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4JP-hE-cpH">
-                                                        <rect key="frame" x="63.999999999999993" y="10.000000000000002" width="28.666666666666664" height="29.666666666666671"/>
+                                                        <rect key="frame" x="63.999999999999993" y="10" width="28.666666666666664" height="24"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -4573,13 +4573,6 @@
                                     <constraint firstAttribute="height" constant="70" id="v2D-LU-Ay1"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="id-card.png" translatesAutoresizingMaskIntoConstraints="NO" id="4IM-r2-9L5">
-                                <rect key="frame" x="10" y="485.33333333333326" width="70" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="1w4-ys-sMl"/>
-                                    <constraint firstAttribute="width" constant="70" id="2C3-M6-deo"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCk-2e-cfD">
                                 <rect key="frame" x="100" y="285.33333333333331" width="250" height="32.333333333333314"/>
                                 <constraints>
@@ -4589,7 +4582,7 @@
                                 <color key="textColor" name="orquidea"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jesus Ramirez Olivedos" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5v-as-OOx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Charging..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5v-as-OOx">
                                 <rect key="frame" x="100" y="331.33333333333331" width="250" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="4Ow-hC-gD1"/>
@@ -4607,28 +4600,10 @@
                                 <color key="textColor" name="orquidea"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jesus Ramirez Olivedos" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qf9-a1-U08">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Charging..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qf9-a1-U08">
                                 <rect key="frame" x="100" y="432.33333333333331" width="250" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="Ddw-pV-n08"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" name="ciruela"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RFC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7a4-Z8-ZMG">
-                                <rect key="frame" x="100" y="485.33333333333331" width="250" height="31.999999999999943"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="hab-na-ZzW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
-                                <color key="textColor" name="orquidea"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jesus Ramirez Olivedos" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRI-Mu-UvO">
-                                <rect key="frame" x="100" y="532.33333333333337" width="250" height="23"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="b5R-9h-4BR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" name="ciruela"/>
@@ -4640,23 +4615,17 @@
                         <constraints>
                             <constraint firstItem="Asn-jX-zm0" firstAttribute="leading" secondItem="YNZ-KQ-x9u" secondAttribute="leading" id="6H7-n4-hPF"/>
                             <constraint firstItem="4HM-zK-1Co" firstAttribute="top" secondItem="Asn-jX-zm0" secondAttribute="bottom" constant="20" id="7t6-PX-e1C"/>
-                            <constraint firstItem="7a4-Z8-ZMG" firstAttribute="top" secondItem="4IM-r2-9L5" secondAttribute="top" id="9oJ-c2-gpm"/>
                             <constraint firstItem="YNZ-KQ-x9u" firstAttribute="trailing" secondItem="Asn-jX-zm0" secondAttribute="trailing" id="9rr-Y8-y47"/>
                             <constraint firstItem="HbE-kt-cyf" firstAttribute="top" secondItem="PSD-O0-KLV" secondAttribute="bottom" constant="30" id="AF9-pT-wL0"/>
-                            <constraint firstItem="4IM-r2-9L5" firstAttribute="leading" secondItem="YNZ-KQ-x9u" secondAttribute="leading" constant="10" id="AFq-eA-aYH"/>
                             <constraint firstItem="anq-hM-Bj6" firstAttribute="centerX" secondItem="wua-Td-9LU" secondAttribute="centerX" id="EIt-Lq-XO8"/>
                             <constraint firstItem="PSD-O0-KLV" firstAttribute="top" secondItem="4HM-zK-1Co" secondAttribute="bottom" constant="20" id="EZq-8r-VV0"/>
                             <constraint firstItem="YNZ-KQ-x9u" firstAttribute="bottom" secondItem="anq-hM-Bj6" secondAttribute="bottom" constant="50" id="HXM-KU-HY0"/>
-                            <constraint firstItem="7a4-Z8-ZMG" firstAttribute="leading" secondItem="4IM-r2-9L5" secondAttribute="trailing" constant="20" id="PDP-rP-5Sd"/>
                             <constraint firstItem="qf9-a1-U08" firstAttribute="bottom" secondItem="HbE-kt-cyf" secondAttribute="bottom" id="QVx-t5-qav"/>
                             <constraint firstItem="4HM-zK-1Co" firstAttribute="centerX" secondItem="wua-Td-9LU" secondAttribute="centerX" id="RG9-TN-uvI"/>
                             <constraint firstItem="HbE-kt-cyf" firstAttribute="leading" secondItem="YNZ-KQ-x9u" secondAttribute="leading" constant="10" id="RPO-qp-aWU"/>
-                            <constraint firstItem="GRI-Mu-UvO" firstAttribute="leading" secondItem="4IM-r2-9L5" secondAttribute="trailing" constant="20" id="WAk-wK-RLj"/>
-                            <constraint firstItem="GRI-Mu-UvO" firstAttribute="bottom" secondItem="4IM-r2-9L5" secondAttribute="bottom" id="XtG-rS-vak"/>
                             <constraint firstItem="Asn-jX-zm0" firstAttribute="height" secondItem="wua-Td-9LU" secondAttribute="height" multiplier="0.25" id="Ygc-Vm-9eC"/>
                             <constraint firstItem="qf9-a1-U08" firstAttribute="leading" secondItem="HbE-kt-cyf" secondAttribute="trailing" constant="20" id="adp-of-P3i"/>
                             <constraint firstItem="NTd-Vh-Mv9" firstAttribute="top" secondItem="HbE-kt-cyf" secondAttribute="top" id="cJc-PZ-Dby"/>
-                            <constraint firstItem="4IM-r2-9L5" firstAttribute="top" secondItem="HbE-kt-cyf" secondAttribute="bottom" constant="30" id="fdB-Uj-Vii"/>
                             <constraint firstItem="ZCk-2e-cfD" firstAttribute="leading" secondItem="PSD-O0-KLV" secondAttribute="trailing" constant="20" id="nGA-3p-f6g"/>
                             <constraint firstItem="k5v-as-OOx" firstAttribute="bottom" secondItem="PSD-O0-KLV" secondAttribute="bottom" id="oSI-px-PZY"/>
                             <constraint firstItem="k5v-as-OOx" firstAttribute="leading" secondItem="PSD-O0-KLV" secondAttribute="trailing" constant="20" id="sSa-41-EJV"/>
@@ -4670,7 +4639,6 @@
                         <outlet property="imvProfile" destination="axH-ZU-bCU" id="ipb-DX-ORF"/>
                         <outlet property="lblEmail" destination="qf9-a1-U08" id="eaI-tB-hKK"/>
                         <outlet property="lblFullName" destination="k5v-as-OOx" id="wAH-Ra-eO3"/>
-                        <outlet property="lblRfc" destination="GRI-Mu-UvO" id="wog-rA-lIe"/>
                         <segue destination="JSg-dw-C4n" kind="presentation" identifier="sgProfileLogin" modalPresentationStyle="fullScreen" id="Wer-YC-XOU"/>
                     </connections>
                 </viewController>
@@ -4680,7 +4648,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="AR5-YY-5Mz"/>
         <segue reference="oWU-U4-NAO"/>
         <segue reference="Wer-YC-XOU"/>
     </inferredMetricsTieBreakers>
@@ -4705,7 +4672,6 @@
         <image name="email.png" width="32" height="34.25"/>
         <image name="familyicon.png" width="521" height="512"/>
         <image name="humity.png" width="28" height="28"/>
-        <image name="id-card.png" width="384" height="384"/>
         <image name="incubator-icon.png" width="512" height="512"/>
         <image name="light.png" width="31" height="32"/>
         <image name="mail.png" width="409.60000610351562" height="409.60000610351562"/>
