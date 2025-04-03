@@ -10,6 +10,12 @@ import UIKit
 class IncubatorDetailViewController: UIViewController {
     var selectedIncubator:Incubator?
 
+    @IBOutlet weak var viewBackgroundStatus: UIView!
+    @IBOutlet weak var viewStatus: UIView!
+    @IBOutlet weak var lblState: UILabel!
+    @IBOutlet weak var lblId: UILabel!
+    @IBOutlet weak var viewDetachment: UIView!
+    @IBOutlet weak var viewSensors: UIView!
     @IBOutlet weak var lblNurse: UILabel!
     @IBOutlet weak var lblBaby: UILabel!
     @IBOutlet weak var lblDate: UILabel!
@@ -30,40 +36,70 @@ class IncubatorDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        lblNurse.text = selectedIncubator?.nurseName
-        lblBaby.text = selectedIncubator?.babyName
-        lblDate.text = selectedIncubator?.created_at
-        
-        backgroundBabyView.roundCorners([.allCorners], 100.0)
-        labelbabyeView.layer.cornerRadius = 32.0
-        backgroundNurseView.layer.cornerRadius = 38.0
-        labelNurseView.layer.cornerRadius = 32.0
-        idView.roundCorners([.topLeft, .topRight, .bottomLeft, .bottomRight], 100.0)
-        backgroundDateView.roundCorners([.topLeft,.topLeft, .bottomLeft, .bottomRight], 100.0)
-        idView.roundCorners([.allCorners], 100.0)
-
-        func makeCircular(_ view: UIView) {
-                let size = min(view.frame.width, view.frame.height)
-                view.layer.cornerRadius = size / 2
-                view.clipsToBounds = true
-                view.layer.masksToBounds = true
+        if let incubator = selectedIncubator {
+            if incubator.state == "available" {
+                lblNurse.text = "No Nurse"
+                lblBaby.text = "No Baby"
+            }else{
+                lblNurse.text = incubator.nurse
+                lblBaby.text = incubator.baby
             }
-
-        makeCircular(iconBabyView)
-        makeCircular(iconNurseView)
-        makeCircular(dateView)
-        makeCircular(dataButtonView)
-        makeCircular(incubatorButtonView)
+            lblDate.text = incubator.created_at
+            lblId.text = String(incubator.id)
+            switch incubator.state.lowercased() {
+            case "active":
+                viewStatus.backgroundColor = UIColor(named: "rojoBonito")
+            case "available":
+                viewStatus.backgroundColor = UIColor(named: "verdeBonito")
+            default:
+                viewStatus.backgroundColor = .gray
+            }
+            lblState.text = incubator.state
+        }
+        viewBackgroundStatus.layoutIfNeeded()
+        viewBackgroundStatus.roundCorners([.allCorners], 100.0)
+        viewStatus.layoutIfNeeded()
+        viewStatus.roundCorners([.allCorners], 100.0)
+        idView.layoutIfNeeded()
+        idView.roundCorners([.topLeft, .bottomLeft], 25.0)
+        dateView.layoutIfNeeded()
+        dateView.roundCorners([.topRight,.bottomRight], 25.0)
+        backgroundDateView.layoutIfNeeded()
+        backgroundDateView.roundCorners([.allCorners], 100.0)
+        labelbabyeView.layoutIfNeeded()
+        labelbabyeView.roundCorners([.topRight,.bottomRight], 25.0)
+        iconBabyView.layoutIfNeeded()
+        iconBabyView.roundCorners([.topLeft,.bottomLeft], 25.0)
+        backgroundBabyView.layoutIfNeeded()
+        backgroundBabyView.roundCorners([.allCorners], 100.0)
+        iconNurseView.layoutIfNeeded()
+        iconNurseView.roundCorners([.topLeft,.bottomLeft], 25.0)
+        labelNurseView.layoutIfNeeded()
+        labelNurseView.roundCorners([.topRight, .bottomRight], 25.0)
+        backgroundNurseView.layoutIfNeeded()
+        backgroundNurseView.roundCorners([.allCorners], 100.0)
+        viewDetachment.layoutIfNeeded()
+        viewDetachment.roundCorners([.allCorners], 100.0)
+        viewSensors.layoutIfNeeded()
+        viewSensors.roundCorners([.allCorners], 100.0)
+        
     }
     
     @IBAction func backButton() {
         dismiss(animated: true)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sgIncubatorDetailSensor",
+           let destinationVC = segue.destination as? SensorsViewController {
+            destinationVC.selectedIncubator = selectedIncubator
+        }
+    }
+    
 }

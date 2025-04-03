@@ -16,13 +16,7 @@ class IncubadorasViewController: UIViewController, UITableViewDataSource, UITabl
     
     let incubatorsEndPoint = "http://34.215.209.108/api/v1/incubatorsNoPaginate"
     
-    var incubators: [Incubator] = [
-            Incubator(id: 1, babyName: "Mateo", nurseName: "Enfermera López", created_at: "2025-02-20 08:30:00"),
-            Incubator(id: 2, babyName: "Sofía", nurseName: "Enfermera Martínez", created_at: "2025-02-20 09:15:00"),
-            Incubator(id: 3, babyName: "Diego", nurseName: "Enfermero Ramírez", created_at: "2025-02-20 10:00:00"),
-            Incubator(id: 4, babyName: "Valentina", nurseName: "Enfermera Pérez", created_at: "2025-02-20 10:45:00"),
-            Incubator(id: 5, babyName: "Sebastián", nurseName: "Enfermera Gómez", created_at: "2025-02-20 11:30:00")
-        ]
+    var incubators: [Incubator] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +26,8 @@ class IncubadorasViewController: UIViewController, UITableViewDataSource, UITabl
         viewBtnCreate.roundCorners([.allCorners], 100.0)
     }
     override func viewWillAppear(_ animated: Bool) {
-        // yiyi
+        setupActivityIndicator()
+        getIncubators()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,9 +38,21 @@ class IncubadorasViewController: UIViewController, UITableViewDataSource, UITabl
         let cell  = incubatorTbv.dequeueReusableCell(withIdentifier: "IncubatorCell", for:indexPath) as! IncubatorsTableViewCell
         
         let incubator = incubators[indexPath.row]
-        cell.babyNameLbl.text = incubator.babyName
-        cell.nurseNameLbl!.text = incubator.nurseName
+       
         cell.lblId.text = String(incubator.id)
+        
+        switch incubator.state.lowercased() {
+        case "active":
+            cell.statusView.backgroundColor = UIColor(named: "rojoBonito")
+            cell.babyNameLbl.text = incubator.baby
+            cell.nurseNameLbl!.text = incubator.nurse!
+        case "available":
+            cell.statusView.backgroundColor = UIColor(named: "verdeBonito")
+            cell.babyNameLbl.text = "No Baby"
+            cell.nurseNameLbl!.text = "No Nurse"
+        default:
+            cell.statusView.backgroundColor = .gray
+        }
         
         return cell
     }
@@ -74,7 +81,7 @@ class IncubadorasViewController: UIViewController, UITableViewDataSource, UITabl
             URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
                 
                 DispatchQueue.main.async {
-                                    self?.activityIndicator.stopAnimating() // Detener en todas las respuestas
+                                    self?.activityIndicator.stopAnimating()
                                 }
                 
                 if let error = error {
@@ -95,6 +102,7 @@ class IncubadorasViewController: UIViewController, UITableViewDataSource, UITabl
                         
                         self?.showError(message: "Unkown Error")
                     }
+                    print(httpResponse)
                 }
             }.resume()
         } catch {
@@ -104,11 +112,18 @@ class IncubadorasViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     private func createURLRequest() throws -> URLRequest {
-        guard let roomId = selectedRoom else {
+        guard let room = selectedRoom else {
                throw NetworkError.invalidURL
            }
         
-        let urlString = "\(incubatorsEndPoint)?room_id=\(roomId)"
+        guard let hospitalId = AuthManager.shared.getHospitalId() else {
+            self.showError(message: "No hospital found.")
+                throw NetworkError.invalidParameters
+            }
+        
+        let urlString = "\(incubatorsEndPoint)?room_id=\(room.id)&hospital_id=\(hospitalId)"
+        
+        print(urlString)
         
         guard let url = URL(string: urlString ) else {
             throw NetworkError.invalidURL
@@ -201,13 +216,29 @@ class IncubadorasViewController: UIViewController, UITableViewDataSource, UITabl
             self.present(alert, animated: true)
         }
     }
+    @IBAction func crear() {
+        let alert = UIAlertController(
+            title: "Confirmation",
+            message: "Do you want to create a new incubator?",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+            // Implement the logic to create a new incubator here
+        }))
+        
+        self.present(alert, animated: true)
+    }
 }
 
 struct Incubator: Decodable{
     let id:Int
-    let babyName: String
-    let nurseName: String
+    let baby: String?
+    let nurse: String?
     let created_at: String
+    let state: String
 }
 
 struct IncubatorsListResponse: Decodable {

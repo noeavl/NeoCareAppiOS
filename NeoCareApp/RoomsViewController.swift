@@ -193,6 +193,7 @@ struct RoomsResponse: Decodable {
 }
 
 struct Room: Decodable{
+    let id: Int
     let number: Int
     let name: String
     let created_at: String
