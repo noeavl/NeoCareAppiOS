@@ -77,6 +77,7 @@ class IncubadorasViewController: UIViewController, UITableViewDataSource, UITabl
                let destinationVC = segue.destination as? IncubatorDetailViewController,
                let selectedIncubator = sender as? Incubator {
             destinationVC.selectedIncubator = selectedIncubator
+            destinationVC.selectedRoom = selectedRoom
             }
     }
     private func getIncubators(){
