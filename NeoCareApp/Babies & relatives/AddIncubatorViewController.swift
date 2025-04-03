@@ -223,6 +223,7 @@ struct AddResponse: Decodable
 
 extension AddIncubatorViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -249,9 +250,11 @@ extension AddIncubatorViewController: UIPickerViewDataSource, UIPickerViewDelega
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == pkvIncubator {
+            guard !incubators.isEmpty else { return }
             let selectedIncubatorId = incubators[row].id
             print("Incubator seleccionado: \(selectedIncubatorId)")
         } else if pickerView == pkvNurse {
+            guard !nurses.isEmpty else { return }
             let selectedNurseId = nurses[row].id
             print("Nurse seleccionado: \(selectedNurseId)")
         }

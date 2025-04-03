@@ -317,7 +317,6 @@ class AddFamiliarViewController: UIViewController {
                         DispatchQueue.main.async {
                             switch httpResponse.statusCode {
                             case 201:
-                                // Reset fields
                                 self?.txfName.text = ""
                                 self?.txfPhone.text = ""
                                 self?.txfEmail.text = ""
@@ -342,7 +341,6 @@ class AddFamiliarViewController: UIViewController {
                             print(httpResponse)
                         }
                     }.resume()
-                    
                 } catch {
                     hideLoadingIndicator()
                     showError(message: "Error creating the request.")
@@ -399,8 +397,7 @@ class AddFamiliarViewController: UIViewController {
             }
         
             print("Response Data: \(String(data: data, encoding: .utf8) ?? "Invalid data")")
-
-            
+        
             do {
                 let babyResponse = try JSONDecoder().decode(BabyResponse.self, from: data)
                 DispatchQueue.main.async { [weak self] in
