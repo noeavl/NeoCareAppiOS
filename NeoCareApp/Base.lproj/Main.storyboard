@@ -4860,7 +4860,7 @@
                                     <action selector="logout" destination="sqZ-Eb-4pZ" eventType="touchUpInside" id="8oj-wk-k2d"/>
                                 </connections>
                             </button>
-<<<<<<< Updated upstream
+
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user.png" translatesAutoresizingMaskIntoConstraints="NO" id="PSD-O0-KLV">
                                 <rect key="frame" x="10" y="285.33333333333331" width="70" height="70"/>
                                 <constraints>
@@ -4911,8 +4911,7 @@
                                 <color key="textColor" name="ciruela"/>
                                 <nil key="highlightedColor"/>
                             </label>
-=======
->>>>>>> Stashed changes
+
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YNZ-KQ-x9u"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -4922,7 +4921,7 @@
                             <constraint firstItem="Asn-jX-zm0" firstAttribute="leading" secondItem="YNZ-KQ-x9u" secondAttribute="leading" id="6H7-n4-hPF"/>
                             <constraint firstItem="4HM-zK-1Co" firstAttribute="top" secondItem="Asn-jX-zm0" secondAttribute="bottom" constant="20" id="7t6-PX-e1C"/>
                             <constraint firstItem="YNZ-KQ-x9u" firstAttribute="trailing" secondItem="Asn-jX-zm0" secondAttribute="trailing" id="9rr-Y8-y47"/>
-<<<<<<< Updated upstream
+
                             <constraint firstItem="HbE-kt-cyf" firstAttribute="top" secondItem="PSD-O0-KLV" secondAttribute="bottom" constant="30" id="AF9-pT-wL0"/>
                             <constraint firstItem="anq-hM-Bj6" firstAttribute="centerX" secondItem="wua-Td-9LU" secondAttribute="centerX" id="EIt-Lq-XO8"/>
                             <constraint firstItem="PSD-O0-KLV" firstAttribute="top" secondItem="4HM-zK-1Co" secondAttribute="bottom" constant="20" id="EZq-8r-VV0"/>
@@ -4938,32 +4937,16 @@
                             <constraint firstItem="k5v-as-OOx" firstAttribute="leading" secondItem="PSD-O0-KLV" secondAttribute="trailing" constant="20" id="sSa-41-EJV"/>
                             <constraint firstItem="NTd-Vh-Mv9" firstAttribute="leading" secondItem="HbE-kt-cyf" secondAttribute="trailing" constant="20" id="uUS-V5-gcg"/>
                             <constraint firstItem="PSD-O0-KLV" firstAttribute="leading" secondItem="YNZ-KQ-x9u" secondAttribute="leading" constant="10" id="vNI-M3-Nny"/>
-=======
-                            <constraint firstItem="YNZ-KQ-x9u" firstAttribute="trailing" secondItem="EM1-it-RZS" secondAttribute="trailing" id="Anl-5k-iK8"/>
-                            <constraint firstItem="zha-ji-ZcS" firstAttribute="top" secondItem="Oyb-QF-WL1" secondAttribute="bottom" constant="10" id="Aye-Kz-xI1"/>
-                            <constraint firstItem="k4a-R6-WSk" firstAttribute="leading" secondItem="YNZ-KQ-x9u" secondAttribute="leading" id="B4O-jP-sKT"/>
-                            <constraint firstItem="EM1-it-RZS" firstAttribute="top" secondItem="4HM-zK-1Co" secondAttribute="bottom" constant="20" id="BFC-JM-9JQ"/>
-                            <constraint firstItem="anq-hM-Bj6" firstAttribute="centerX" secondItem="wua-Td-9LU" secondAttribute="centerX" id="EIt-Lq-XO8"/>
-                            <constraint firstItem="YNZ-KQ-x9u" firstAttribute="bottom" secondItem="anq-hM-Bj6" secondAttribute="bottom" constant="20" id="HXM-KU-HY0"/>
-                            <constraint firstItem="4HM-zK-1Co" firstAttribute="centerX" secondItem="wua-Td-9LU" secondAttribute="centerX" id="RG9-TN-uvI"/>
-                            <constraint firstItem="Asn-jX-zm0" firstAttribute="height" secondItem="wua-Td-9LU" secondAttribute="height" multiplier="0.25" id="Ygc-Vm-9eC"/>
-                            <constraint firstItem="zha-ji-ZcS" firstAttribute="trailing" secondItem="YNZ-KQ-x9u" secondAttribute="trailing" id="bGI-e0-2LL"/>
-                            <constraint firstItem="Oyb-QF-WL1" firstAttribute="top" secondItem="EM1-it-RZS" secondAttribute="bottom" constant="10" id="dhr-8T-1Vp"/>
-                            <constraint firstItem="Oyb-QF-WL1" firstAttribute="leading" secondItem="YNZ-KQ-x9u" secondAttribute="leading" id="djd-sW-692"/>
-                            <constraint firstItem="EM1-it-RZS" firstAttribute="leading" secondItem="YNZ-KQ-x9u" secondAttribute="leading" id="h6z-Dy-gPl"/>
-                            <constraint firstItem="Oyb-QF-WL1" firstAttribute="trailing" secondItem="YNZ-KQ-x9u" secondAttribute="trailing" id="ia9-tG-vQc"/>
-                            <constraint firstItem="zha-ji-ZcS" firstAttribute="leading" secondItem="YNZ-KQ-x9u" secondAttribute="leading" id="oaD-ZB-6su"/>
->>>>>>> Stashed changes
+
                             <constraint firstItem="Asn-jX-zm0" firstAttribute="top" secondItem="YNZ-KQ-x9u" secondAttribute="top" id="vcq-Ly-JMQ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="imvProfile" destination="axH-ZU-bCU" id="ipb-DX-ORF"/>
-<<<<<<< Updated upstream
+
                         <outlet property="lblEmail" destination="qf9-a1-U08" id="eaI-tB-hKK"/>
                         <outlet property="lblFullName" destination="k5v-as-OOx" id="wAH-Ra-eO3"/>
-=======
->>>>>>> Stashed changes
+
                         <segue destination="JSg-dw-C4n" kind="presentation" identifier="sgProfileLogin" modalPresentationStyle="fullScreen" id="Wer-YC-XOU"/>
                     </connections>
                 </viewController>
