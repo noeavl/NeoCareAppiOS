@@ -21,6 +21,11 @@ class RoomsViewController: UIViewController, UITableViewDataSource, UITableViewD
         viewBtnCreate.roundCorners([.allCorners], 100.0)
     }
     override func viewWillAppear(_ animated: Bool) {
+        if let role = AuthManager.shared.getRole(), role == "nurse-admin" {
+                viewBtnCreate.isHidden = false
+            } else {
+                viewBtnCreate.isHidden = true
+            }
         setupActivityIndicator()
         getRooms()
     }
