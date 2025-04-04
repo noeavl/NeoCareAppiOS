@@ -9,21 +9,22 @@ import UIKit
 
 class SensorsViewController: UIViewController {
     var selectedIncubator: Incubator?
-    var sensors: [String:Sensor] = [:]
+    var sensors: [String:SensorData] = [:]
 
-    let sensorsEndPoint = "http://34.215.209.108/api/v1/sensor-data"
+    let sensorsEndPoint = "http://34.215.209.108/api/v1/latest-sensor-data"
     @IBOutlet var backgroundSensors: [UIView]!
     @IBOutlet var backgroundSensorLbl: [UIView]!
     @IBOutlet var backgroundInfoSensor: [UIView]!
     @IBOutlet var backgroundStatus: [UIView]!
     @IBOutlet weak var lblAverageTemperature: UILabel!
     
+    @IBOutlet weak var lblValueTemBaby: UILabel!
+    @IBOutlet weak var lblNoDataTempBaby: UILabel!
     @IBOutlet weak var lblAverageSound: UILabel!
     @IBOutlet weak var lblAverageLight: UILabel!
     @IBOutlet weak var lblAverageVibration: UILabel!
     @IBOutlet weak var lblAverageMovement: UILabel!
     @IBOutlet weak var lblAverageHumidity: UILabel!
-    @IBOutlet weak var lblAverage: UILabel!
     @IBOutlet weak var lblNoDataVibration: UILabel!
     @IBOutlet weak var lblNoDataLight: UILabel!
     @IBOutlet weak var lblNoDataMovement: UILabel!
@@ -31,6 +32,7 @@ class SensorsViewController: UIViewController {
     @IBOutlet weak var lblNoDataHumidity: UILabel!
     @IBOutlet weak var lblNoDataTemperature: UILabel!
     @IBOutlet weak var lblNoDataFound: UILabel!
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
@@ -94,6 +96,7 @@ class SensorsViewController: UIViewController {
                         self?.lblNoDataSound.isHidden = false
                         self?.lblNoDataMovement.isHidden = false
                         self?.lblNoDataVibration.isHidden = false
+                        self?.lblNoDataTempBaby.isHidden = false
                     default:
                         self?.showError(message: "Unkown Error")
                     }
@@ -136,37 +139,46 @@ class SensorsViewController: UIViewController {
         }
         
         do {
-            let sensorsResponse = try JSONDecoder().decode(SensorsResponse.self, from: data)
-            guard let sensorStats = sensorsResponse.sensor_statistics else {
-                        showNoDataMessage()
-                        return
-                    }
+            let response = try JSONDecoder().decode(SensorsResponse.self, from: data)
+            print("API Response:", response)
             
-            // Verificar si todos los sensores están sin datos
-            let allSensorsEmpty = sensorStats.values.allSatisfy { !$0.hasData }
+            // Manejo de respuesta con mensaje de error
+            if let errorMessage = response.message {
+                showNoDataMessage(message: errorMessage)
+                return
+            }
             
-            if allSensorsEmpty {
-                       showNoDataMessage()
-                   } else {
-                       self.sensors = sensorStats
-                       self.lblNoDataFound.isHidden = true
-                       self.updateSensorUI()
-                   }
-                   
+            // Convertir la respuesta a diccionario
+            let sensorData = response.sensorDictionary
+            
+            // Verificar si hay datos
+            if sensorData.isEmpty {
+                showNoDataMessage(message: "No recent sensor data available")
+                return
+            }
+            
+            self.lblNoDataFound.isHidden = true
+            self.updateSensorUI(with: sensorData)
         } catch {
             showError(message: "Error processing the response.")
         }
     }
-    private func updateSensorUI() {
-        // Función helper para formatear valores
-        func formatValue(_ value: Float?, unit: String?) -> String {
-            guard let value = value, let unit = unit else { return "N/A" }
-            return String(format: "%.1f %@", value, unit)
+    private func updateSensorUI(with sensorData: [String: SensorData]) {
+        guard !sensorData.isEmpty else {
+               showNoDataMessage(message: "No sensor data to display")
+               return
+           }
+        
+        if let sensor = sensorData["TBB"], sensor.hasData {
+            lblValueTemBaby.text = "\(sensor.floatValue ?? 0) °C"
+            lblNoDataTempBaby.isHidden = true
+        } else {
+            lblValueTemBaby.text = "N/A"
+            lblNoDataTempBaby.isHidden = false
         }
         
-        // Temperatura del bebé (TBB)
-        if let sensor = sensors["TBB"], sensor.hasData {
-            lblAverageTemperature.text = formatValue(sensor.average, unit: sensor.unit)
+        if let sensor = sensorData["TAM"], sensor.hasData {
+            lblAverageTemperature.text = "\(sensor.floatValue ?? 0) °C"
             lblNoDataTemperature.isHidden = true
         } else {
             lblAverageTemperature.text = "N/A"
@@ -174,73 +186,75 @@ class SensorsViewController: UIViewController {
         }
         
         // Sonido (SON)
-        if let sensor = sensors["SON"], sensor.hasData {
-            lblAverageSound.text = formatValue(sensor.average, unit: sensor.unit)
+        if let sensor = sensorData["SON"], sensor.hasData {
+            lblAverageSound.text = "\(sensor.floatValue ?? 0) dB"
             lblNoDataSound.isHidden = true
         } else {
             lblAverageSound.text = "N/A"
             lblNoDataSound.isHidden = false
         }
         
-        // Luz (LDR)
-        if let sensor = sensors["LDR"], sensor.hasData {
-            lblAverageLight.text = formatValue(sensor.average, unit: sensor.unit)
-            lblNoDataLight.isHidden = true
-        } else {
-            lblAverageLight.text = "N/A"
-            lblNoDataLight.isHidden = false
-        }
-        
-        // Vibración (VRB)
-        if let sensor = sensors["VRB"], sensor.hasData {
-            lblAverageVibration.text = formatValue(sensor.average, unit: sensor.unit)
-            lblNoDataVibration.isHidden = true
-        } else {
-            lblAverageVibration.text = "N/A"
-            lblNoDataVibration.isHidden = false
-        }
-        
-        // Movimiento (HAM)
-        if let sensor = sensors["HAM"], sensor.hasData {
-            lblAverageMovement.text = formatValue(sensor.average, unit: sensor.unit)
+        // Movimiento (PRE)
+        if let sensor = sensorData["PRE"], sensor.hasData {
+            lblAverageMovement.text = "\(sensor.floatValue ?? 0) Pa"
             lblNoDataMovement.isHidden = true
         } else {
             lblAverageMovement.text = "N/A"
             lblNoDataMovement.isHidden = false
         }
         
-        // Humedad (HUM)
-        if let sensor = sensors["HUM"] ?? sensors["TAM"], sensor.hasData { // Algunos sistemas usan HUM o TAM para humedad
-            lblAverageHumidity.text = formatValue(sensor.average, unit: sensor.unit)
+        // Vibracion (VRB)
+        if let sensor = sensorData["VRB"], sensor.hasData {
+            lblAverageVibration.text = "\(sensor.floatValue ?? 0) m/s"
+            lblNoDataVibration.isHidden = true
+        } else {
+            lblAverageVibration.text = "N/A"
+            lblNoDataVibration.isHidden = false
+        }
+        
+        // Vibracion (VRB)
+        if let sensor = sensorData["LDR"], sensor.hasData {
+            lblAverageLight.text = "\(sensor.floatValue ?? 0) lux"
+            lblNoDataLight.isHidden = true
+        } else {
+            lblAverageLight.text = "N/A"
+            lblNoDataLight.isHidden = false
+        }
+        
+        if let sensor = sensorData["HAM"], sensor.hasData {
+            lblAverageHumidity.text = "\(sensor.floatValue ?? 0) %"
             lblNoDataHumidity.isHidden = true
         } else {
             lblAverageHumidity.text = "N/A"
             lblNoDataHumidity.isHidden = false
         }
+        
+        
     }
     
-    private func showNoDataMessage() {
+    private func showNoDataMessage(message: String = "No recorded data found") {
         DispatchQueue.main.async {
-            self.sensors.removeAll()
-            self.lblNoDataFound.text = "No recorded data found."
-            self.lblNoDataFound.isHidden = false
-            
-            // Ocultar todos los labels individuales de "No data"
-            self.lblNoDataLight.isHidden = true
-            self.lblNoDataTemperature.isHidden = true
-            self.lblNoDataHumidity.isHidden = true
-            self.lblNoDataSound.isHidden = true
-            self.lblNoDataMovement.isHidden = true
-            self.lblNoDataVibration.isHidden = true
-            
-            // Resetear todos los valores
-            self.lblAverageTemperature.text = "N/A"
-            self.lblAverageSound.text = "N/A"
-            self.lblAverageLight.text = "N/A"
-            self.lblAverageVibration.text = "N/A"
-            self.lblAverageMovement.text = "N/A"
-            self.lblAverageHumidity.text = "N/A"
-        }
+                self.lblNoDataFound.text = message
+                self.lblNoDataFound.isHidden = false
+                
+                // Resetear todos los valores
+                self.lblAverageTemperature.text = "N/A"
+                self.lblAverageSound.text = "N/A"
+                self.lblAverageLight.text = "N/A"
+                self.lblAverageVibration.text = "N/A"
+                self.lblAverageMovement.text = "N/A"
+                self.lblAverageHumidity.text = "N/A"
+                self.lblValueTemBaby.text = "N/A"
+                
+                // Mostrar todos los labels de "No data"
+                self.lblNoDataTemperature.isHidden = false
+                self.lblNoDataSound.isHidden = false
+                self.lblNoDataLight.isHidden = false
+                self.lblNoDataVibration.isHidden = false
+                self.lblNoDataMovement.isHidden = false
+                self.lblNoDataHumidity.isHidden = false
+                self.lblNoDataTempBaby.isHidden = false
+            }
     }
     
     private func setupActivityIndicator() {
@@ -278,24 +292,38 @@ class SensorsViewController: UIViewController {
 }
 
 struct SensorsResponse:Decodable {
-    let incubator_id: Int?
-    let total_readings: Int?
-    let first_reading_time: String?
-    let last_reading_time: String?
-    let sensor_statistics: [String:Sensor]?
+    let message: String? // Solo para errores (404)
+    let TAM: SensorData?
+    let HAM: SensorData?
+    let TBB: SensorData?
+    let LDR: SensorData?
+    let SON: SensorData?
+    let VRB: SensorData?
+    let PRE: SensorData?
+    
+    // Computed property para acceder a todos los sensores como diccionario
+    var sensorDictionary: [String: SensorData] {
+        var dict = [String: SensorData]()
+        if let tam = TAM { dict["TAM"] = tam }
+        if let ham = HAM { dict["HAM"] = ham }
+        if let tbb = TBB { dict["TBB"] = tbb }
+        if let ldr = LDR { dict["LDR"] = ldr }
+        if let son = SON { dict["SON"] = son }
+        if let vrb = VRB { dict["VRB"] = vrb }
+        if let pre = PRE { dict["PRE"] = pre }
+        return dict
+    }
 }
 
-struct Sensor: Decodable{
-    let average : Float?
-    let min: Float?
-    let max: Float?
-    let count: Int?
-    let first_reading: String?
-    let last_reading: String?
-    let range: Float?
-    let unit: String?
-    let message: String?
+struct SensorData: Decodable{
+    let value: String?
+    let date: String?
+    
     var hasData: Bool {
-            return message == nil
-        }
+        return value != nil && date != nil
+    }
+    
+    var floatValue: Float? {
+        return value.flatMap { Float($0) }
+    }
 }

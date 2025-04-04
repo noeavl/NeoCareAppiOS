@@ -46,7 +46,7 @@ class VerificationViewController: UIViewController {
         
         showLoadingIndicator()
         
-        let sendEmailRequest = SendEmailRequest(email: email )
+        let sendEmailRequest = SendEmailRequest(email: email, is_app: true)
         
         do{
             let request = try createURLRequest(for: sendEmailRequest)
@@ -209,6 +209,7 @@ class VerificationViewController: UIViewController {
 
 struct SendEmailRequest: Encodable {
     let email: String
+    let is_app: Bool
 }
 
 struct SendEmailResponse:Decodable{
