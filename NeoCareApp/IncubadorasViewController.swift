@@ -130,8 +130,6 @@ class IncubadorasViewController: UIViewController, UITableViewDataSource, UITabl
         
         let urlString = "\(incubatorsEndPoint)?room_id=\(room.id)&hospital_id=\(hospitalId)"
         
-        print(urlString)
-        
         guard let url = URL(string: urlString ) else {
             throw NetworkError.invalidURL
         }

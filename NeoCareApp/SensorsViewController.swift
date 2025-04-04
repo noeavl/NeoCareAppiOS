@@ -10,7 +10,9 @@ import UIKit
 class SensorsViewController: UIViewController {
     var selectedIncubator: Incubator?
     var sensors: [String:SensorData] = [:]
-
+    
+    @IBOutlet weak var viewStatusTemp: UIView!
+    @IBOutlet weak var viewStatusHumidity: UIView!
     let sensorsEndPoint = "http://34.215.209.108/api/v1/latest-sensor-data"
     @IBOutlet var backgroundSensors: [UIView]!
     @IBOutlet var backgroundSensorLbl: [UIView]!
@@ -18,6 +20,11 @@ class SensorsViewController: UIViewController {
     @IBOutlet var backgroundStatus: [UIView]!
     @IBOutlet weak var lblAverageTemperature: UILabel!
     
+    @IBOutlet weak var viewStatusVibration: UIView!
+    @IBOutlet weak var viewStatusMovement: UIView!
+    @IBOutlet weak var viewStatusSound: UIView!
+    @IBOutlet weak var viewStatusLight: UILabel!
+    @IBOutlet weak var viewStatusTempBaby: UIView!
     @IBOutlet weak var lblValueTemBaby: UILabel!
     @IBOutlet weak var lblNoDataTempBaby: UILabel!
     @IBOutlet weak var lblAverageSound: UILabel!
@@ -35,7 +42,7 @@ class SensorsViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        
         for backgroundSensor in backgroundSensors {
             backgroundSensor.layer.cornerRadius = 10
             backgroundSensor.clipsToBounds = true
@@ -48,7 +55,7 @@ class SensorsViewController: UIViewController {
         
         for backgroundInfoSensor in backgroundInfoSensor {
             backgroundInfoSensor.layer.cornerRadius = 10
-            backgroundInfoSensor.clipsToBounds = true   
+            backgroundInfoSensor.clipsToBounds = true
         }
         
         for backgroundStatus in backgroundStatus {
@@ -70,8 +77,8 @@ class SensorsViewController: UIViewController {
             URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
                 
                 DispatchQueue.main.async {
-                                    self?.activityIndicator.stopAnimating()
-                                }
+                    self?.activityIndicator.stopAnimating()
+                }
                 
                 if let error = error {
                     self?.showError(message: "Network Error: \(error.localizedDescription)")
@@ -110,8 +117,8 @@ class SensorsViewController: UIViewController {
     
     private func createURLRequest() throws -> URLRequest {
         guard let incubator = selectedIncubator else {
-               throw NetworkError.invalidURL
-           }
+            throw NetworkError.invalidURL
+        }
         
         let urlString = "\(sensorsEndPoint)/\(incubator.id)"
         
@@ -131,8 +138,8 @@ class SensorsViewController: UIViewController {
     
     private func handleSuccessResponse(data: Data?) {
         DispatchQueue.main.async {
-                   self.activityIndicator.stopAnimating()
-               }
+            self.activityIndicator.stopAnimating()
+        }
         guard let data = data else {
             showError(message: "Empty Response data.")
             return
@@ -159,15 +166,16 @@ class SensorsViewController: UIViewController {
             
             self.lblNoDataFound.isHidden = true
             self.updateSensorUI(with: sensorData)
+            self.updateSensorColors(sensorData: sensorData)
         } catch {
             showError(message: "Error processing the response.")
         }
     }
     private func updateSensorUI(with sensorData: [String: SensorData]) {
         guard !sensorData.isEmpty else {
-               showNoDataMessage(message: "No sensor data to display")
-               return
-           }
+            showNoDataMessage(message: "No sensor data to display")
+            return
+        }
         
         if let sensor = sensorData["TBB"], sensor.hasData {
             lblValueTemBaby.text = "\(sensor.floatValue ?? 0) °C"
@@ -230,6 +238,85 @@ class SensorsViewController: UIViewController {
         }
         
         
+    }
+    
+    func getColorForTemperature(temp: Float) -> UIColor {
+        if temp >= 32 {
+            return UIColor.red // Rojo si la temperatura es mayor o igual a 32
+        } else if temp >= 25 {
+            return UIColor.yellow // Amarillo si la temperatura es mayor o igual a 25
+        } else if temp >= 20 {
+            return UIColor.green // Verde si la temperatura es mayor o igual a 20
+        } else {
+            return UIColor.red // Rojo si la temperatura es menor a 20
+        }
+    }
+    
+    func getColorForVibration(value: Float) -> UIColor {
+        return value == 1 ? UIColor.green : UIColor.red // Si hay vibración, verde; si no, rojo
+    }
+    
+    func getColorForSound(value: Float) -> UIColor {
+        if value > 85 {
+            return UIColor.red // Peligroso (rojo)
+        } else if value >= 60 {
+            return UIColor.orange // Fuerte (naranja)
+        } else if value >= 30 {
+            return UIColor.yellow // Moderado (amarillo)
+        } else {
+            return UIColor.green // Bajo (verde)
+        }
+    }
+    
+    func getColorForMovement(value: Float) -> UIColor {
+        return value == 0 ? UIColor.gray : UIColor.green // Sin movimiento (gris), con movimiento (verde)
+    }
+    
+    func getColorForLight(value: Float) -> UIColor {
+        if value > 800 {
+            return UIColor.yellow // Brillante (amarillo)
+        } else if value >= 400 {
+            return UIColor.green // Normal (verde)
+        } else {
+            return UIColor.red // Bajo (rojo)
+        }
+    }
+    
+    func getColorForHumidity(humidity: Float) -> UIColor {
+        if humidity < 40 {
+            return UIColor.red // Baja (rojo)
+        } else if humidity < 70 {
+            return UIColor.yellow // Media (amarillo)
+        } else {
+            return UIColor.green // Alta (verde)
+        }
+    }
+    
+    func updateSensorColors(sensorData: [String: SensorData]) {
+        // Para cada sensor, actualizamos los colores de fondo de los UIView
+        if let tempSensor = sensorData["TAM"], let tempValue = tempSensor.floatValue {
+            viewStatusTemp.backgroundColor = getColorForTemperature(temp: tempValue)
+        }
+        
+        if let vibrationSensor = sensorData["VRB"], let vibrationValue = vibrationSensor.floatValue {
+            viewStatusVibration.backgroundColor = getColorForVibration(value: vibrationValue)
+        }
+        
+        if let soundSensor = sensorData["SON"], let soundValue = soundSensor.floatValue {
+            viewStatusSound.backgroundColor = getColorForSound(value: soundValue)
+        }
+        
+        if let movementSensor = sensorData["PRE"], let movementValue = movementSensor.floatValue {
+            viewStatusMovement.backgroundColor = getColorForMovement(value: movementValue)
+        }
+        
+        if let lightSensor = sensorData["LDR"], let lightValue = lightSensor.floatValue {
+            viewStatusLight.backgroundColor = getColorForLight(value: lightValue)
+        }
+        
+        if let humiditySensor = sensorData["HAM"], let humidityValue = humiditySensor.floatValue {
+            viewStatusHumidity.backgroundColor = getColorForHumidity(humidity: humidityValue)
+        }
     }
     
     private func showNoDataMessage(message: String = "No recorded data found") {
