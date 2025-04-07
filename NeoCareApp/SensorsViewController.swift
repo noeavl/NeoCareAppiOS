@@ -11,6 +11,7 @@ class SensorsViewController: UIViewController {
     var selectedIncubator: Incubator?
     var sensors: [String:SensorData] = [:]
     
+    @IBOutlet weak var btnRefresh: UIButton!
     @IBOutlet weak var viewStatusTemp: UIView!
     @IBOutlet weak var viewStatusHumidity: UIView!
     let sensorsEndPoint = "http://34.215.209.108/api/v1/latest-sensor-data"
@@ -69,6 +70,14 @@ class SensorsViewController: UIViewController {
         lblNoDataFound.isHidden = true
     }
     
+    @IBAction func refreshData() {
+        btnRefresh.isEnabled = false 
+        getSensors()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.btnRefresh.isEnabled = true
+        }
+    }
     private func getSensors(){
         activityIndicator.startAnimating()
         do{

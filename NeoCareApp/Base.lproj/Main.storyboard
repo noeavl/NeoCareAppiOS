@@ -1938,7 +1938,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CrY-zA-rPY">
-                                <rect key="frame" x="293" y="712" width="80" height="80"/>
+                                <rect key="frame" x="293" y="682" width="80" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTz-qm-8Mh">
                                         <rect key="frame" x="10" y="10" width="60" height="60"/>
@@ -1970,7 +1970,7 @@
                             <constraint firstItem="WWk-BJ-XXX" firstAttribute="top" secondItem="2To-Nb-A5L" secondAttribute="top" id="ect-jV-mKs"/>
                             <constraint firstItem="czB-m8-h9c" firstAttribute="trailing" secondItem="WWk-BJ-XXX" secondAttribute="trailing" id="jST-oQ-eX5"/>
                             <constraint firstItem="2To-Nb-A5L" firstAttribute="bottom" secondItem="czB-m8-h9c" secondAttribute="bottom" constant="10" id="jU0-jX-ksY"/>
-                            <constraint firstAttribute="bottom" secondItem="CrY-zA-rPY" secondAttribute="bottom" constant="60" id="neI-vA-nup"/>
+                            <constraint firstAttribute="bottom" secondItem="CrY-zA-rPY" secondAttribute="bottom" constant="90" id="neI-vA-nup"/>
                             <constraint firstItem="czB-m8-h9c" firstAttribute="top" secondItem="WWk-BJ-XXX" secondAttribute="bottom" constant="20" id="o1o-ui-LUY"/>
                             <constraint firstItem="2To-Nb-A5L" firstAttribute="trailing" secondItem="CrY-zA-rPY" secondAttribute="trailing" constant="20" id="sAo-TP-Gxi"/>
                             <constraint firstItem="WWk-BJ-XXX" firstAttribute="leading" secondItem="2To-Nb-A5L" secondAttribute="leading" constant="20" id="xH1-YH-lTR"/>
@@ -2701,7 +2701,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t3M-7Y-Zk6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-775.20000000000005" y="2928.3251231527097"/>
+            <point key="canvasLocation" x="-776.33587786259534" y="2928.1690140845071"/>
         </scene>
         <!--Incubator Detail View Controller-->
         <scene sceneID="nvc-ex-yCJ">
@@ -3824,6 +3824,22 @@
                                     <constraint firstAttribute="width" secondItem="pV2-xv-99z" secondAttribute="height" multiplier="176:133" id="yHQ-SF-6Ui"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHi-PS-kex">
+                                <rect key="frame" x="313" y="772" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="BpB-3q-axH"/>
+                                    <constraint firstAttribute="width" constant="60" id="GQV-fz-0Y9"/>
+                                </constraints>
+                                <color key="tintColor" name="violeta"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" image="arrow.clockwise" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="25"/>
+                                    <color key="baseBackgroundColor" name="violeta"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="refreshData" destination="DeP-zm-Sp6" eventType="touchUpInside" id="jrX-zC-Ubd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nZY-bQ-tkf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3845,6 +3861,7 @@
                             <constraint firstItem="o7K-76-3yN" firstAttribute="bottom" secondItem="UCr-NQ-Xfx" secondAttribute="bottom" id="MgW-n8-Ftq"/>
                             <constraint firstItem="o7K-76-3yN" firstAttribute="top" secondItem="UCr-NQ-Xfx" secondAttribute="top" id="NWn-Pi-M0u"/>
                             <constraint firstItem="mpz-q1-qWq" firstAttribute="bottom" secondItem="Xsw-Oo-a5I" secondAttribute="bottom" id="OZr-xb-2Wb"/>
+                            <constraint firstItem="nZY-bQ-tkf" firstAttribute="trailing" secondItem="OHi-PS-kex" secondAttribute="trailing" constant="20" id="Pht-Pc-eof"/>
                             <constraint firstItem="o7K-76-3yN" firstAttribute="width" secondItem="o30-N4-Ghz" secondAttribute="width" multiplier="0.440152" id="UK6-W5-HO8"/>
                             <constraint firstItem="sPV-Sv-S8M" firstAttribute="width" secondItem="o30-N4-Ghz" secondAttribute="width" multiplier="0.439394" id="UjU-Ne-RiN"/>
                             <constraint firstItem="o7K-76-3yN" firstAttribute="centerX" secondItem="o30-N4-Ghz" secondAttribute="centerX" multiplier="1.47" id="Vst-Zg-xs9"/>
@@ -3856,6 +3873,7 @@
                             <constraint firstItem="o7K-76-3yN" firstAttribute="top" secondItem="mpz-q1-qWq" secondAttribute="bottom" constant="20" id="ftY-dO-kLT"/>
                             <constraint firstItem="8sT-k1-sNj" firstAttribute="bottom" secondItem="Abw-62-fQ2" secondAttribute="bottom" id="mND-hB-Pmu"/>
                             <constraint firstItem="HMT-Vp-xTw" firstAttribute="top" secondItem="8sT-k1-sNj" secondAttribute="bottom" constant="20" id="t5R-Ow-ccC"/>
+                            <constraint firstItem="nZY-bQ-tkf" firstAttribute="bottom" secondItem="OHi-PS-kex" secondAttribute="bottom" constant="20" id="vhN-2z-zFV"/>
                             <constraint firstItem="HMT-Vp-xTw" firstAttribute="width" secondItem="o30-N4-Ghz" secondAttribute="width" multiplier="0.44" id="wAu-sm-xHV"/>
                             <constraint firstItem="mpz-q1-qWq" firstAttribute="top" secondItem="Xsw-Oo-a5I" secondAttribute="top" id="wWr-Ec-5Df"/>
                             <constraint firstItem="8sT-k1-sNj" firstAttribute="top" secondItem="Abw-62-fQ2" secondAttribute="top" id="we3-nm-TpM"/>
@@ -3864,6 +3882,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="CVc-4e-cFH"/>
                     <connections>
+                        <outlet property="btnRefresh" destination="OHi-PS-kex" id="6nH-gc-QR2"/>
                         <outlet property="lblAverageHumidity" destination="JYy-qf-cic" id="TTR-eC-l9x"/>
                         <outlet property="lblAverageLight" destination="4aF-hz-gmM" id="Mht-i3-aE2"/>
                         <outlet property="lblAverageMovement" destination="CPd-Dh-azo" id="oP5-nT-IEM"/>
@@ -5062,6 +5081,7 @@
         <image name="Image 5" width="33" height="33"/>
         <image name="LOGOBLANCO.png" width="1241" height="996"/>
         <image name="LOGOMORADO.png" width="1920" height="1080"/>
+        <image name="arrow.clockwise" catalog="system" width="110" height="128"/>
         <image name="arrowshape.left.fill" catalog="system" width="128" height="104"/>
         <image name="arrowshape.right.fill" catalog="system" width="128" height="104"/>
         <image name="baby-icon.png" width="470" height="512"/>
